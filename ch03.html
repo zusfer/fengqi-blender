@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 3 章 建模核心工具：做一只马克杯 · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html" class="active">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-3-章-建模核心工具-做一只马克杯">第 3 章 建模核心工具：做一只马克杯</h1>
+<blockquote>
+<p><strong>场景</strong>：这一章你第一次真正"进去捏"模型：把一根圆柱，几步捏成一只带手柄的马克杯。学完它，你已经会了 80% 日常建模所用的工具。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>在编辑模式里选择顶点 / 边 / 面（<code>1</code> / <code>2</code> / <code>3</code> 切换）；</li>
+<li>用<strong>挤出 <code>E</code></strong> 长出新的结构、用<strong>内插 <code>I</code></strong> 做杯口、用<strong>倒角 <code>Ctrl+B</code></strong> 磨圆边缘；</li>
+<li>完整做出你的第一个作品——马克杯。</li>
+</ul>
+<h2 id="核心概念-编辑模式的-四板斧">核心概念：编辑模式的"四板斧"</h2>
+<p>建模最常用的操作其实只有几个，本章全部登场：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>快捷键</th>
+<th>一句话解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>挤出 Extrude</td>
+<td><code>E</code></td>
+<td>把选中的面"拉"出来一段，长出新的身体</td>
+</tr>
+<tr>
+<td>内插 Inset</td>
+<td><code>I</code></td>
+<td>在选中面内部缩出一个小一圈的面（做杯口/边框）</td>
+</tr>
+<tr>
+<td>倒角 Bevel</td>
+<td><code>Ctrl+B</code></td>
+<td>把锋利的边磨圆（真实世界没有绝对锐利的边角）</td>
+</tr>
+<tr>
+<td>环切 Loop Cut</td>
+<td><code>Ctrl+R</code></td>
+<td>横着加一圈线，为了后续变形或细分更均匀</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择模式</strong>是编辑模式里的第一步：按 <code>1</code> 选顶点、<code>2</code> 选边、<code>3</code> 选面。九成的建模操作从"选中一个面"开始。</p>
+<hr />
+<h2 id="跟着做-七步做一只马克杯">跟着做：七步做一只马克杯</h2>
+<p>每张图都是这一步做完后<strong>真实渲染</strong>的样子，橙色是"这一步正在操作的面"。跟着做一遍，全流程约 20 分钟。先看全流程总览（①→⑦）：</p>
+<p><img alt="马克杯七步总览" src="assets/ch03_mug_all.png" /></p>
+<p><em>图 18　全流程一览：圆柱 → 选顶面 → 内插 → 挤出下压 → 倒角 → 加手柄 → 完成</em></p>
+<h3 id="第-1-步-从圆柱开始">第 1 步：从圆柱开始</h3>
+<ol>
+<li><code>Shift+A</code> → 网格 → 圆柱体（Cylinder）；</li>
+<li>左下角刚弹出的"添加圆柱体"面板里（错过的话按 <code>F9</code>），把<strong>顶点数（Vertices）改成 64</strong>——顶点数越多，圆柱越圆。32～64 是常用范围；</li>
+<li>按 <code>G</code> <code>Z</code>… 不需要——圆柱默认立着且中心在原点，我们先按 <code>小键盘 1</code>、<code>小键盘 7</code> 观察一下它。</li>
+</ol>
+<p><img alt="第1步 圆柱" src="assets/ch03_mug_1_cyl.png" /></p>
+<p><em>图 19　起点：一根普通圆柱</em></p>
+<h3 id="第-2-步-进入编辑模式-选中顶面">第 2 步：进入编辑模式，选中顶面</h3>
+<ol>
+<li>按 <code>Tab</code> 进入编辑模式（如果没进去：先在视口里点一下圆柱再按）；</li>
+<li>按 <code>3</code> 切到<strong>面选择</strong>模式；</li>
+<li>左键点击圆柱<strong>顶面</strong>（点不中就先转视角，从稍高处往下看）。</li>
+</ol>
+<p><img alt="第2步 选中顶面" src="assets/ch03_mug_2_top_sel.png" /></p>
+<p><em>图 20　顶面被选中（橙色示意。"选中"在你屏幕上=橙色高亮）</em></p>
+<p>💡 <strong>转不到、看不清、选不中？</strong> 按 <code>Alt+Z</code> 打开 <strong>X 光透视（X-Ray）</strong>——模型变半透明，框选能穿过去选到被挡住的点。用完再按一次关掉，别一直开着（会误选到背面的点）。</p>
+<h3 id="第-3-步-内插-i-给自己缩出-杯口沿">第 3 步：内插（<code>I</code>）——给自己缩出"杯口沿"</h3>
+<p>按 <code>I</code>，然后<strong>移动鼠标</strong>向内缩，缩到杯壁厚度差不多（比如缩进 8%），左键确认。</p>
+<p><img alt="第3步 内插" src="assets/ch03_mug_3_inset.png" /></p>
+<p><em>图 21　内插出一个同心的小面。这个小面接下来要"凹下去"变成杯腔</em></p>
+<p><img alt="真实界面对照" src="assets/site_ch03_inset_after.png" /></p>
+<p><em>图 22　真实软件截图：内插后面仍被选中（橙色），外圈就是留下的杯口沿</em></p>
+<p>💡 也可以直接输入数值：按 <code>I</code> 后键入 <code>0.06</code> 回车，或在左下角面板里精调厚度（Thickness）。</p>
+<h3 id="第-4-步-挤出下压-e-挖出杯腔">第 4 步：挤出下压（<code>E</code>）——挖出杯腔</h3>
+<ol>
+<li>内插后的小面<strong>还在选中状态</strong>（如果不是，点一下选中它）；</li>
+<li>按 <code>E</code>（挤出）→ 立刻按 <code>Z</code>（锁定竖直轴）→ 向下移动鼠标，压到接近杯底（留出杯底厚度）；</li>
+<li>左键确认。杯腔出现了！</li>
+</ol>
+<p><img alt="第4步 挤出下压（剖切视图）" src="assets/ch03_mug_4_cavity.png" /></p>
+<p><em>图 23　图中把杯子剖开一半方便你看清楚：内壁、杯腔、杯底厚度一次到位</em></p>
+<p>⚠️ <strong>本步必错点</strong>：<code>E</code> 之后忘了按 <code>Z</code>，面会跟着鼠标乱窜。按 <code>Esc</code> 重来，先 <code>E</code> 再 <code>Z</code>，慢一点。</p>
+<h3 id="第-5-步-倒角-ctrl-b-磨圆杯口和杯底">第 5 步：倒角（<code>Ctrl+B</code>）——磨圆杯口和杯底</h3>
+<ol>
+<li>按 <code>2</code> 切到<strong>边选择</strong>模式；</li>
+<li>按住 <code>Alt</code> <strong>左键点杯口的一条边缘</strong>——整圈边会被选中（这就是"循环边选择"，一个超好用的选择方式）；</li>
+<li>按住 <code>Shift+Alt</code> 再点<strong>杯底</strong>的一圈边，两组一起选上；</li>
+<li>按 <code>Ctrl+B</code>，轻微移动鼠标（做成细倒角）→ 滚轮增加段数到 2～3 段 → 左键确认。</li>
+</ol>
+<p><img alt="第5步 倒角" src="assets/ch03_mug_5_bevel.png" /></p>
+<p><em>图 24　杯口外沿变得柔和了。图里不明显是正常的——倒角是"质感级"的细节</em></p>
+<p>⚠️ <code>Ctrl+B</code> 若没反应：检查是不是在<strong>物体模式</strong>（需先 <code>Tab</code> 进编辑模式）或没选中任何边。</p>
+<h3 id="第-6-步-加手柄">第 6 步：加手柄</h3>
+<ol>
+<li>按 <code>Tab</code> 回到物体模式；</li>
+<li><code>Shift+A</code> → 网格 → 圆环（Torus）；</li>
+<li>按 <code>R</code> <code>X</code> <code>90</code> <code>Enter</code>（或 <code>R Y 90</code>）把圆环立起来；</li>
+<li>按 <code>S</code> 缩小到合适的柄径（比如 <code>S</code> <code>0.6</code> <code>Enter</code>，视你的杯子大小调整）；</li>
+<li><code>G</code> <code>X</code> 把它移动到杯壁旁，让圆环<strong>与杯壁相交（一半埋进杯体）</strong>——从外面看就是一个把手。</li>
+</ol>
+<p><img alt="第6步 加手柄" src="assets/ch03_mug_6_handle.png" /></p>
+<p><em>图 25　手柄（橙色示意）就位。真实手柄就是"埋进杯壁的圆环"</em></p>
+<h3 id="第-7-步-平滑着色收尾">第 7 步：平滑着色收尾</h3>
+<ol>
+<li>选中杯身（左键）→ <strong>右键</strong>呼出菜单 → 平滑着色（Shade Smooth）；</li>
+<li>选中手柄，同样平滑着色；</li>
+<li><code>小键盘 0</code> 看相机视角，调整相机后按 <code>F12</code>——渲染！你第一件作品完成了。</li>
+</ol>
+<p><img alt="第7步 完成" src="assets/ch03_mug_7_final.png" /></p>
+<p><em>图 26　成品。从一根圆柱到一只杯子，你用的就是职业建模师每天用的那几招</em></p>
+<p>💡 做好的杯子记得 <code>Ctrl+S</code> 保存。如果你想看看"标准答案"，可以打开 <code>examples/</code> 文件夹里附带的示例（由脚本一键重造，见第 8 章预告）。</p>
+<hr />
+<h2 id="收工前的两个进阶动作-选修">收工前的两个进阶动作（选修）</h2>
+<h3 id="检查-杯底到底多厚-正交视图">检查：杯底到底多厚？（正交视图）</h3>
+<p>转着看容易看走眼，用正交前视图检查最准：</p>
+<ol>
+<li>按 <code>小键盘 1</code> 切正前视图；</li>
+<li>编辑模式按 <code>Alt+Z</code> 打开 X 光，框选内底那一圈顶点；</li>
+<li>看它离最下面外底线的落差——那就是杯底厚度；</li>
+<li>检查完关掉 X 光，<code>Tab</code> 回物体模式。</li>
+</ol>
+<p><img alt="正交检查杯底" src="assets/site_ch03_base_check.png" /></p>
+<p><em>图 27　真实软件截图：橙色水平线是内底，它和外底之间的落差就是杯底厚度</em></p>
+<h3 id="更讲究的手柄-两针插进杯壁的半环-进阶做法">更讲究的手柄：两针插进杯壁的半环（进阶做法）</h3>
+<p>第 6 步的"完整圆环"简单好用，但看起来像"挂"在杯壁上。想要更真实，可以做<strong>半环手柄</strong>——让上下两个端口真正埋进杯壁里（下面的数字以示例杯为参考，按你的杯子等比缩放）：</p>
+<ol>
+<li><code>Shift+A</code> 加圆环（主半径约为杯口半径的一半、次半径约为壁厚的一半），先回到原点、保持平躺；</li>
+<li><code>小键盘 7</code> 切顶视图 → <code>Tab</code> 进编辑模式 → 按 <code>1</code> 切顶点模式 → <code>Alt+Z</code> 开 X 光 → 框选左半边（X 小于 0）的顶点，按 <code>X</code> 选"顶点"删除；</li>
+<li>两个断口各是一圈开放的点：分别框选上、下端口，各按一次 <code>F</code> 补上面；</li>
+<li>回物体模式，<code>R</code> <code>X</code> <code>90</code> <code>Enter</code> 把它立起来，再挪到杯壁旁：<strong>位置 X 比杯口半径略小一点</strong>（端口埋进壁里）、Z 在杯高中部；</li>
+<li>前视图核对：两个端口都藏进壁厚里，转动杯子检查杯腔——内部不露头，才算成功。</li>
+</ol>
+<p><img alt="删除半环" src="assets/site_ch03_handle_del.png" /></p>
+<p><em>图 28　真实软件截图：X 光下框选左半边的顶点删掉，只留右半环</em></p>
+<p><img alt="手柄位置" src="assets/site_ch03_handle_pos.png" /></p>
+<p><em>图 29　立起后放到位：两个端口都在杯壁里面——比一整个圆环"仿真"得多</em></p>
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Tab</code> 没反应</td>
+<td>没有选中物体 / 鼠标不在视口里</td>
+<td>先左键点物体，再点视口空白确认鼠标位置，再按 <code>Tab</code></td>
+</tr>
+<tr>
+<td>挤出后模型乱成一团</td>
+<td><code>E</code> 后没锁轴</td>
+<td><code>Ctrl+Z</code> 撤回，重来：<code>E</code> → <code>Z</code> → 移动</td>
+</tr>
+<tr>
+<td><code>E</code> 之后按了 <code>Esc</code></td>
+<td>想取消移动，但新几何其实已经生成了</td>
+<td>别用 <code>Esc</code> 收场：直接 <code>Ctrl+Z</code> 撤销整个挤出，再重来</td>
+</tr>
+<tr>
+<td>内插参数离谱</td>
+<td>鼠标移动幅度太大</td>
+<td>按 <code>Esc</code> 撤回重来，或 <code>F9</code> 面板里直接改数值</td>
+</tr>
+<tr>
+<td><code>Ctrl+B</code> 倒角把模型倒穿了</td>
+<td>倒角量大于结构厚度</td>
+<td><code>Ctrl+Z</code> 撤销，减小鼠标移动幅度 / 直接输入小数值</td>
+</tr>
+<tr>
+<td>顶面点不中</td>
+<td>视角太低看不到顶面</td>
+<td>转视角从上方看（或 <code>小键盘 7</code> 俯视图）</td>
+</tr>
+<tr>
+<td>手柄插进杯腔里了</td>
+<td>位置/大小没对</td>
+<td>进编辑模式看剖切：手柄应只与"杯壁"相交，不要伸进腔体</td>
+</tr>
+<tr>
+<td>渲染一片黑 / 什么都没有</td>
+<td>相机没对准 / 没有灯</td>
+<td>先跳过渲染，第 7 章专门教灯和相机，本章看到实物形状就行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>我独立做出了马克杯：杯腔、杯口沿、杯底都在，从上面能看到内壁；</li>
+<li>我知道 <code>E</code> 挤出和 <code>G</code> 移动的区别，挤出后记得先按轴向键再移动；</li>
+<li>选修动作至少试过一个：正交检查杯底厚度 / 半环手柄。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>在编辑模式里切换"点/线/面"选择模式的快捷键分别是什么？</li>
+<li>"把顶面凹下去变成杯腔"用的是哪两个按键的组合操作？</li>
+<li><code>Alt+左键</code>点击一条边会发生什么？为什么它比逐条点边高效？</li>
+<li>倒角的目的用一句话说是什么？</li>
+<li>如果想给杯子加"两圈竖向的装饰凹槽"，环切 <code>Ctrl+R</code> 大概会怎么用？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li><code>1</code> 顶点、<code>2</code> 边、<code>3</code> 面。</li>
+<li><code>E</code>（挤出）后按 <code>Z</code>（锁竖轴）向下移动；或等价地说是"内插后挤出下压"。</li>
+<li>选中整圈"循环边"（环形的连续边）；一整圈几十条边一次选中，不用逐条点。</li>
+<li>把锐利的边磨成圆角，让模型更像真实世界的产品（同时改善渲染高光）。</li>
+<li>切到边/面模式，<code>Ctrl+R</code> 把鼠标横放在杯壁上，滚轮加圈数（比如 4 圈），分段做凹槽或后续继续挤出细节。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>编辑模式</strong>：<code>Tab</code> 进出，<code>1/2/3</code> 切换点/线/面选择。</li>
+<li><strong>四板斧</strong>：<code>E</code> 挤出长结构、<code>I</code> 内插做边缘、<code>Ctrl+B</code> 倒角磨圆、<code>Ctrl+R</code> 加环线。</li>
+<li><strong>循环边选择</strong>：<code>Alt+左键</code>点一条边选中整圈，配合 <code>Shift</code> 多选。</li>
+<li><strong>马克杯流程</strong>：圆柱 → 选顶面 → 内插 → 挤出下压 → 倒角 → 加环（手柄）→ 平滑着色。</li>
+<li>你已经跨过了最难的门槛：<strong>从"看"进入"做"</strong>。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch02.html"><small>← 上一节</small><span>第 2 章 必会操作：你的第一个小时</span></a><a class="next" href="ch04.html"><small>下一节 →</small><span>第 4 章 修改器：新手加速器</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

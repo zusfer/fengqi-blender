@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 8 章 进阶：Python 参数化建模——改一个数字，造型重造 · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html" class="active">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-8-章-进阶-python-参数化建模-改一个数字-造型重造">第 8 章 进阶：Python 参数化建模——改一个数字，造型重造</h1>
+<blockquote>
+<p><strong>场景</strong>：你做好一张桌子，朋友说"想要 1.8 米的长条版"。手捏党熬夜重画；参数化党改了 1 个数字，10 秒后新桌子出炉。这一章带你摸到"自动化"的门槛——放心，只用最基础的几行代码。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>明白"参数化"是什么、什么时候值得用；</li>
+<li>在 Blender 里运行你的第一段脚本；</li>
+<li>学会"常量表 + 生成脚本"的简单工作法；</li>
+<li>知道"无头渲染"是怎么回事（了解即可，不强求会用）。</li>
+</ul>
+<h2 id="核心概念-什么是-参数化">核心概念：什么是"参数化"</h2>
+<p><strong>参数化 = 把尺寸变成数字，让程序按数字干活。</strong></p>
+<p>先看效果——下面两张图来自<strong>同一段脚本</strong>，唯一改动是"桌长"这一个数字（0.9 → 1.8）：</p>
+<p><img alt="参数化效果：同一脚本，仅改桌长" src="assets/param_table_pair.png" /></p>
+<p><em>图 55　数字变了，桌子自动"长"出来了——这就是参数化</em></p>
+<p>什么时候值得用参数化？</p>
+<table>
+<thead>
+<tr>
+<th>值得用</th>
+<th>不值得用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>尺寸驱动的东西：家具、建筑、零件</td>
+<td>雕刻类角色、动物（手捏更自然）</td>
+</tr>
+<tr>
+<td>要反复调尺寸的作品（改一版、再改一版）</td>
+<td>一次就完事的小物件（顺手捏更快）</td>
+</tr>
+<tr>
+<td>想一次生成好几种变体（加长版、矮版、宽版）</td>
+<td>高度艺术化的造型</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="跟着做-1-让-blender-跑起第一段脚本">跟着做 1：让 Blender 跑起第一段脚本</h2>
+<p>Blender 里自带 Python 编程环境，不用装任何额外软件。</p>
+<ol>
+<li>打开 Blender，把顶部工作区标签切到 <strong>Scripting（脚本）</strong>；</li>
+<li>在中间的大文本框里，粘贴下面这段（直接抄）：</li>
+</ol>
+<pre><code class="language-python">import bpy
+
+count = 6        # 柱子数量
+spacing = 0.6    # 柱子间距（米）
+height = 0.9     # 柱子高度（米）
+
+for i in range(count):
+    bpy.ops.mesh.primitive_cube_add(
+        size=1,
+        location=(i * spacing, 0, height / 2),
+        scale=(0.12, 0.12, height),
+    )
+
+print(&quot;生成完毕：&quot;, count, &quot;根柱子&quot;)
+</code></pre>
+<ol start="3">
+<li>点击文本框上面的<strong>运行脚本</strong>按钮（或按 <code>Alt+P</code>）；</li>
+<li>回到 Layout 工作区看一眼——6 根柱子整整齐齐地站在那里。</li>
+</ol>
+<p>代码其实就三句人话：</p>
+<ul>
+<li><code>import bpy</code>：引入 Blender 的"操作接口"，脚本的第一行永远长这样；</li>
+<li><code>bpy.ops.mesh.primitive_cube_add(...)</code>：就是"添加立方体"这个动作的代码版，和 <code>Shift+A</code> 做的事一模一样；</li>
+<li><code>for i in range(count):</code>：把下面的动作重复 <code>count</code> 次，每次位置往后挪一点。</li>
+</ul>
+<p>💡 看出来了吗？<strong>写脚本就是把"你手动输入的数值"变成"纸面上的数字"</strong>。就这么简单。</p>
+<h2 id="跟着做-2-改数字-再看变化">跟着做 2：改数字，再看变化</h2>
+<p>回到那段代码，把第一行改成：</p>
+<pre><code class="language-python">count = 12       # 试试 12 根
+spacing = 0.35   # 间距也调小
+</code></pre>
+<p>再运行一次（先 <code>Ctrl+Z</code> 撤销上一批柱子）。同样的代码，数字一改，结果立刻不一样——<strong>你已经在做参数化了</strong>。</p>
+<h2 id="跟着做-3-常量表-生成脚本-正经项目的做法">跟着做 3：常量表 + 生成脚本——正经项目的做法</h2>
+<p>真正做项目时，把代码分成两个文件：</p>
+<p><strong>文件 1：<code>geom_table.py</code>（常量表，只放数字）</strong></p>
+<pre><code class="language-python">TABLE_LENGTH = 0.9    # 桌长
+TABLE_WIDTH  = 0.62   # 桌宽
+TOP_THICK    = 0.05   # 桌面厚度
+LEG_HEIGHT   = 0.75   # 桌腿高度
+LEG_RADIUS   = 0.04   # 桌腿粗细
+</code></pre>
+<p><strong>文件 2：<code>build_table.py</code>（生成脚本，只引用数字）</strong></p>
+<pre><code class="language-python">import bpy
+from geom_table import *   # 把常量表里的数字全部引进来
+
+# 桌面
+bpy.ops.mesh.primitive_cube_add(
+    size=1, location=(0, 0, LEG_HEIGHT + TOP_THICK / 2),
+    scale=(TABLE_LENGTH, TABLE_WIDTH, TOP_THICK),
+)
+
+# 四条桌腿（循环生成，位置根据桌长自动算）
+for sx in (-1, 1):
+    for sy in (-1, 1):
+        bpy.ops.mesh.primitive_cylinder_add(
+            radius=LEG_RADIUS, depth=LEG_HEIGHT,
+            location=(sx * (TABLE_LENGTH / 2 - 0.09),
+                      sy * (TABLE_WIDTH / 2 - 0.07),
+                      LEG_HEIGHT / 2),
+        )
+
+print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
+</code></pre>
+<p>【跟着做】</p>
+<ol>
+<li>把两段代码分别存成两个文件（<code>geom_table.py</code> 和 <code>build_table.py</code>），放在同一个文件夹；</li>
+<li>在 Scripting 工作区用"文本 → 打开"载入 <code>build_table.py</code>，运行——一张小桌出现；</li>
+<li><strong>只改常量表里的 <code>TABLE_LENGTH</code></strong>（0.9 → 1.8），重新运行——桌子自动变成 1.8 米长条版。</li>
+</ol>
+<p>💡 这就是参数化的全部秘密：<strong>改数字的地方只有一处（常量表），其余全部自动</strong>。项目越大，这个习惯越值钱。</p>
+<p>把整个流程串起来，就是一张图：</p>
+<p><img alt="参数化工作流程" src="assets/ch08_d_flow.png" /></p>
+<p><em>图 56　图示：常量表 → 生成脚本 → 无头渲染 → 对比检查，不满意就回去改数字再跑一遍</em></p>
+<h2 id="了解一下-无头渲染">了解一下：无头渲染</h2>
+<p>"无头（headless）渲染" = <strong>不打开 Blender 界面，用命令行直接出图</strong>。适合"一次渲染 8 个视角"这类批量活儿：</p>
+<pre><code class="language-bash">blender --background --python build_table.py    # 不进界面，直接跑脚本
+</code></pre>
+<p>你不需要马上学会它，只要知道<strong>有这么一回事</strong>：参数化 + 无头渲染，就是"批量生成模型和图片"的组合拳。感兴趣的话，等前面的内容都用熟了再回来研究，不必现在啃。</p>
+<hr />
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>脚本运行了，"什么都没发生"</td>
+<td>物体加在了视线外</td>
+<td>按 <code>Home</code> 全览视角找找</td>
+</tr>
+<tr>
+<td>红色报错 <code>SyntaxError</code></td>
+<td>用了中文标点，或缩进乱</td>
+<td>代码里只用英文标点；缩进用 4 个空格</td>
+</tr>
+<tr>
+<td>上一批柱子还在，又叠了一批</td>
+<td>脚本是"继续添加"，不是"重来"</td>
+<td>先 <code>Ctrl+Z</code> 撤销，或新建场景再跑</td>
+</tr>
+<tr>
+<td>想调参数找不到数字</td>
+<td>数字散落在代码各处</td>
+<td>学"跟着做 3"，把所有数字集中到常量表</td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>我能说出脚本的"三段式"：参数写顶部 → 循环管重复 → 命令干实事；</li>
+<li>我成功加载并运行过一次脚本，跑出了图形（或模型）；</li>
+<li>我改过脚本里的一个数字，重跑看到结果变了。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>哪类东西值得参数化？举两个例子。</li>
+<li>"常量表 + 生成脚本"的两个文件各管什么？</li>
+<li><code>for i in range(count):</code> 这行代码是什么意思？</li>
+<li>无头渲染适合什么场景？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li>尺寸驱动、需要反复调整的东西，如家具、建筑、机械零件（答案合理即可）。</li>
+<li>常量表只管放数字（一处修改全局生效）；生成脚本只管按数字干活，不写死尺寸。</li>
+<li>把它下面的动作重复执行 <code>count</code> 次，每次变量 <code>i</code> 从 0 数到 <code>count-1</code>，可用来错开位置。</li>
+<li>批量任务：一次跑很多个视角/很多个变体，不开界面自动出图。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>参数化 = 尺寸变数字，程序按数字干活</strong>；适合家具、建筑、反复调尺寸的项目。</li>
+<li>Blender 里切到 <strong>Scripting 工作区</strong>就能写脚本；<code>bpy.ops</code> 就是"操作的代码版"。</li>
+<li><strong>常量表 + 生成脚本</strong>是正经项目的骨架：数字住一起，逻辑管自动。</li>
+<li>无头渲染 = 批量出图的后门，<strong>先知道、后使用</strong>。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch07.html"><small>← 上一节</small><span>第 7 章 灯光、相机与渲染</span></a><a class="next" href="ch09.html"><small>下一节 →</small><span>第 9 章 工程管理与导入导出</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 2 章 必会操作：你的第一个小时 · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html" class="active">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-2-章-必会操作-你的第一个小时">第 2 章 必会操作：你的第一个小时</h1>
+<blockquote>
+<p><strong>场景</strong>：这一小时不学建模，只练"驾驶技术"。学完它，你能让任何物体在 3D 空间里精确地到你想要的位置——这是后面所有章节的地基。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>熟练使用变换三件套：移动 <code>G</code>、旋转 <code>R</code>、缩放 <code>S</code>；</li>
+<li>用轴向约束把操作锁定在 X / Y / Z 单轴上；</li>
+<li>用数值输入做"毫米级"精确操作；</li>
+<li>掌握选择系统的组合拳，能快速选中想选的东西。</li>
+</ul>
+<h2 id="核心概念-变换-transform-与坐标轴">核心概念：变换（Transform）与坐标轴</h2>
+<p>3D 世界里只有三种"挪动"方式，称为<strong>变换</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>变换</th>
+<th>快捷键</th>
+<th>生活比喻</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动（Move/Grab）</td>
+<td><code>G</code></td>
+<td>把桌子搬到别处</td>
+</tr>
+<tr>
+<td>旋转（Rotate）</td>
+<td><code>R</code></td>
+<td>把桌子转个方向</td>
+</tr>
+<tr>
+<td>缩放（Scale）</td>
+<td><code>S</code></td>
+<td>把桌子改大改小</td>
+</tr>
+</tbody>
+</table>
+<p>每个变换都发生在坐标系里。记住右手边这个"三色轴"：</p>
+<ul>
+<li><strong>红色 = X 轴</strong>（左右方向）</li>
+<li><strong>绿色 = Y 轴</strong>（前后方向）</li>
+<li><strong>蓝色 = Z 轴</strong>（上下方向，Blender 里朝上的轴）</li>
+</ul>
+<p><img alt="RGB 坐标轴演示" src="assets/ch02_cube_1_origin.png" /></p>
+<p><em>图 11　场景里的三色轴：红 X、绿 Y、蓝 Z。下面四个图请对照看</em></p>
+<hr />
+<h2 id="跟着做-1-g-r-s-三连">跟着做 1：G / R / S 三连</h2>
+<p>打开 Blender（如果上一个场景还在，按 <code>Ctrl+N</code> 新建一个干净的）。</p>
+<p><strong>① 移动（Grab）</strong></p>
+<ol>
+<li>左键点击立方体选中它；</li>
+<li>按 <code>G</code>（Grab 的缩写），然后<strong>只移动鼠标</strong>——立方体会跟着跑，注意此时不要点击；</li>
+<li>左键点击 = 确认；<strong>右键 / <code>Esc</code> = 取消</strong>（把方块放回原位）。这两个"后悔键"之后每次变换都通用。</li>
+</ol>
+<p><img alt="G 移动" src="assets/ch02_cube_2_grab.png" /></p>
+<p><em>图 12　按 G 后移动鼠标，立方体沿鼠标方向移动（图中向右移动到 X 轴正方向）</em></p>
+<p><strong>② 轴向约束——本课重点</strong></p>
+<p>刚才的移动是"跟着鼠标随便跑"。要沿<strong>单轴</strong>精确移动，在按 <code>G</code> 之后、点击确认之前，再按一下轴键：</p>
+<ul>
+<li><code>G</code> 然后按 <code>X</code>：只沿 X 轴移动（红轴方向）</li>
+<li><code>G</code> 然后按 <code>Y</code>：只沿 Y 轴</li>
+<li><code>G</code> 然后按 <code>Z</code>：只沿 Z 轴（上下方向）</li>
+</ul>
+<p>再按一次同一个轴键 = 切换到"排除该轴"；按 <code>Shift+X</code> = 在 YZ 平面上自由移动（排除 X 轴）。</p>
+<p><strong>③ 数值输入——精确操作</strong></p>
+<p>Blender 的变换支持直接打数字：</p>
+<pre><code>G  X  1.5  Enter    → 沿 X 轴精确移动 1.5 米
+R  Z  45   Enter    → 绕 Z 轴精确旋转 45 度
+S      2    Enter    → 整体放大到 2 倍
+</code></pre>
+<p>【跟着做】把立方体沿 X 轴移动 1.5 米，再撤销回原位（<code>Ctrl+Z</code>）。</p>
+<p><strong>④ 旋转（R）</strong></p>
+<ol>
+<li>选中立方体，按 <code>R</code>，移动鼠标——它在转了；</li>
+<li><code>Esc</code> 取消。再按 <code>R</code>、<code>Z</code>、输入 <code>45</code>、<code>Enter</code>——绕竖直轴精确转 45 度。</li>
+</ol>
+<p><img alt="R 旋转" src="assets/ch02_cube_3_rotate.png" /></p>
+<p><em>图 13　绕 Z 轴旋转 45 度（俯视时能看到明显转动）</em></p>
+<p><strong>⑤ 缩放（S）</strong></p>
+<ol>
+<li>选中立方体，按 <code>S</code>，移动鼠标——变大变小；</li>
+<li><code>S</code> <code>X</code> <code>1.5</code> <code>Enter</code> = 只在 X 方向拉长 1.5 倍（长条效果）。</li>
+</ol>
+<p><img alt="S 缩放" src="assets/ch02_cube_4_scale.png" /></p>
+<p><em>图 14　整体放大 1.6 倍后的样子</em></p>
+<hr />
+<h2 id="跟着做-2-选择系统的组合拳">跟着做 2：选择系统的组合拳</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左键点击</td>
+<td>选中一个物体</td>
+</tr>
+<tr>
+<td><code>Shift + 左键</code></td>
+<td>加选 / 减选（在已选中上再点一次 = 取消）</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>全选（再按一次 = 取消全选）</td>
+</tr>
+<tr>
+<td><code>Alt + A</code></td>
+<td>全部取消选择</td>
+</tr>
+<tr>
+<td><code>B</code> 后框选</td>
+<td>拉一个矩形框，框内的都被选中</td>
+</tr>
+</tbody>
+</table>
+<p>【跟着做】</p>
+<ol>
+<li>用 <code>Shift+A</code>（添加菜单）→ 网格 → 球体，加一个球；</li>
+<li><code>A</code> 全选 → 立方体和球都亮了；</li>
+<li><code>Alt+A</code> 全取消 → 再单独左键点球选中它；</li>
+<li>按 <code>X</code>（删除菜单）→ 删除 → 球没了。<code>Ctrl+Z</code> 能把它救回来。</li>
+</ol>
+<p>💡 <strong>添加物体的位置规律</strong>：新物体总是出现在<strong>3D 游标</strong>（那个红白小圆圈）所在的位置。如果新加的物体总是不在原点：<code>Shift+C</code>（把游标归零并全览视角），或 <code>Shift+右键</code> 点地面把游标放过去，再加物体。这是新手最常问的"我的新物体去哪了"。</p>
+<hr />
+<h2 id="跟着做-3-综合小练习-搭一张-小凳子">跟着做 3：综合小练习——搭一张"小凳子"</h2>
+<p>用刚学的技术搭出以下结构（不用追求好看，练手感）：</p>
+<ol>
+<li><code>Shift+A</code> 加一个立方体，<code>S</code> <code>0.8</code> <code>Enter</code> 缩小一点；</li>
+<li><code>G</code> <code>Z</code> <code>0.5</code> <code>Enter</code> 抬高到半空——这是"凳面"；</li>
+<li><code>Shift+A</code> 再加一个立方体，<code>S</code> <code>0.15</code> <code>Enter</code> 缩成小柱子；</li>
+<li><code>G</code> <code>X</code> 移动它到凳面一角下方，再 <code>G</code> <code>Z</code> 调整高度顶住凳面；</li>
+<li>再添加三条腿（可以复制现成的腿：选中后 <code>Shift+D</code> 复制，<code>G</code> 挪位置）。</li>
+</ol>
+<p><code>Shift+D</code> 是<strong>复制物体</strong>的快捷键：复制出来的副本会粘着鼠标，<code>G</code> 或直接点击决定放哪。以后你想"再要一个一样的"，就靠它。</p>
+<p><img alt="小凳子练习示意" src="assets/ch02_cube_1_origin.png" /></p>
+<p><em>图 15　摆完大概是这样一棵"独腿凳"，四项操作全用上了，这就够了</em></p>
+<hr />
+<h2 id="进阶一点-变换的数值面板">进阶一点：变换的数值面板</h2>
+<p>每次做完操作（比如刚移动完），左下角会弹出一个小面板（或按 <code>F9</code> 呼出），里面是该次操作的<strong>参数</strong>：移动了多少、旋转了几度，都可以回头精调。这就是为什么 Blender 允许你"先粗略做，再精确改"。</p>
+<p>另外，视口右侧按 <code>N</code> 打开的**侧栏（Sidebar）**里，能看到并直接修改选中物体的位置/旋转/缩放数值——需要"把坐标输入成 0.35 这种"的时候，这里是操作台。</p>
+<hr />
+<h2 id="进阶一点-世界轴-局部轴与-尺寸-缩放">进阶一点：世界轴、局部轴与"尺寸 ≠ 缩放"</h2>
+<p><strong>世界轴 vs 局部轴。</strong> 变换时再按一次同一个轴键（比如 <code>G</code> <code>X</code> <code>X</code>），约束就从"世界的 X"切换成"物体自己的 X"。物体被旋转过之后，按它"自己的方向"移动会顺手得多——视口顶部会显示当前用的是全局还是局部。</p>
+<p><strong>尺寸 ≠ 缩放。</strong> 按 <code>N</code> 打开侧栏看看："尺寸"是物体<strong>实际多大</strong>，"缩放"是相对原始网格的<strong>倍率</strong>。被 <code>S</code> 随意缩过的物体，缩放值不是 1——平时没感觉，但后面加修改器（尤其倒角和厚度）时容易出怪结果。</p>
+<p><strong>收尾习惯：<code>Ctrl+A</code> → 缩放。</strong> 对用 <code>S</code> 改过大小的物体，选中它 → <code>Ctrl+A</code> → 缩放：外观一点不变，缩放值变回 (1, 1, 1)，等于把"这次缩放"焊进网格。建模告一段落、准备加修改器之前，顺手做一遍。</p>
+<p><img alt="应用缩放前" src="assets/site_ch02_npanel.png" /></p>
+<p><em>图 16　真实软件截图：N 面板里缩放是 (0.5, 0.5, 0.25)——这是倍率，不是实际尺寸</em></p>
+<p><img alt="应用缩放后" src="assets/site_ch02_apply_scale.png" /></p>
+<p><em>图 17　<code>Ctrl+A</code> → 缩放之后：外观没变，缩放值全变回了 (1, 1, 1)</em></p>
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按 G 之后物体跟着鼠标乱飞</td>
+<td>正常！此时还没确认</td>
+<td>左键确认 / 右键或 <code>Esc</code> 取消，别慌着乱点</td>
+</tr>
+<tr>
+<td>移动完了才想改数值</td>
+<td>已确认的操作可以救</td>
+<td>左下角面板（或 <code>F9</code>）改参数</td>
+</tr>
+<tr>
+<td>新加的物体总是歪的/偏的</td>
+<td>3D 游标不在原点</td>
+<td><code>Shift+C</code> 归零游标后再添加</td>
+</tr>
+<tr>
+<td><code>Shift+D</code> 复制的和在原地分不开</td>
+<td>副本和原件完全重叠</td>
+<td>复制后立刻 <code>G</code> 移开</td>
+</tr>
+<tr>
+<td>缩放后导出别的软件比例不对</td>
+<td>缩放值没有"应用"</td>
+<td>见上一节：<code>Ctrl+A</code> → 缩放，一步解决</td>
+</tr>
+<tr>
+<td>键盘没小键盘、<code>1/2/3</code> 没反应</td>
+<td>或者是你正在中文输入法下</td>
+<td>切英文输入法；没有小键盘就勾选"模拟小键盘"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>我能说出框选两个方向的区别，并用"右往左"快速选走一堆零星小物体；</li>
+<li>我能开着 <code>F8</code> 正交 + <code>F3</code> 捕捉，用三种方式（相对坐标 / 直接输距离 / 捕捉咬点）精确给尺寸；</li>
+<li>我知道"尺寸"和"缩放"的区别，并对缩放过的物体做过一次 <code>Ctrl+A</code> → 缩放。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>把物体沿 X 轴精确移动 2 米，写出完整按键序列。</li>
+<li><code>G</code> 之后按了 <code>Z</code>，物体还能在水平面移动吗？为什么？</li>
+<li>复制物体的快捷键是什么？和选中物体的快捷键有什么区别？</li>
+<li>新添加的物体不在原点，最可能的原因和最短修复方法？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li>选中物体 → <code>G</code> → <code>X</code> → <code>2</code> → <code>Enter</code>（X 对应红色轴；若按了 <code>Z</code> 就是竖直方向了）。</li>
+<li>不能。按 <code>Z</code> 后移动被锁定在 Z 轴（竖直方向）；再按一次 <code>Z</code> 反而会排除 Z 轴变成水平移动，<code>Shift+Z</code> 也是排除。</li>
+<li><code>Shift+D</code> 复制；<code>A</code> 全选——注意别记混，一个是 Duplicate 一个是 All。</li>
+<li>3D 游标不在原点；按 <code>Shift+C</code> 把游标归零。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>变换三件套</strong>：<code>G</code> 移、<code>R</code> 转、<code>S</code> 缩；左键确认，右键/<code>Esc</code> 取消。</li>
+<li><strong>锁轴</strong>：<code>G/R/S</code> 后按 <code>X/Y/Z</code> 单轴，<code>Shift+轴</code> 排除该轴。</li>
+<li><strong>数值输入</strong>：变换中直接打数字再回车，指哪打哪。</li>
+<li><strong>选择</strong>：左键选、<code>Shift</code>加减、<code>A</code>全选、<code>Alt+A</code>清空、<code>B</code>框选。</li>
+<li><strong>复制</strong> <code>Shift+D</code>；<strong>后悔</strong> <code>Ctrl+Z</code>；<strong>改参数</strong> <code>F9</code> 或左下角面板。</li>
+<li><strong>游标</strong>决定新物体出生点：<code>Shift+C</code> 归零。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch01.html"><small>← 上一节</small><span>第 1 章 认识 Blender</span></a><a class="next" href="ch03.html"><small>下一节 →</small><span>第 3 章 建模核心工具：做一只马克杯</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

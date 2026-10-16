@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 7 章 灯光、相机与渲染：你的第一张成品图 · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html" class="active">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-7-章-灯光-相机与渲染-你的第一张成品图">第 7 章 灯光、相机与渲染：你的第一张成品图</h1>
+<blockquote>
+<p><strong>场景</strong>：模型有了、材质有了——这一章让它"出片"。灯光是 3D 的眼睛，相机是你的镜头，渲染键按下去的那一刻，就是见证奇迹的时刻。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>搭出一套万能的<strong>三点布光</strong>；</li>
+<li>摆好相机、理解焦距对画面的影响；</li>
+<li>认识两个渲染引擎（Eevee / Cycles）并做出选择；</li>
+<li><strong>渲染并保存你的第一张成品图</strong>。</li>
+</ul>
+<h2 id="核心概念-1-灯光的四要素">核心概念 1：灯光的四要素</h2>
+<p>一盏灯能不能"用"，看四个参数（都在灯光的属性面板里）：</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>类型</strong></td>
+<td>点光（灯泡）/ 面光（柔光箱）/ 太阳光（太阳）/ 聚光（舞台灯）</td>
+</tr>
+<tr>
+<td><strong>功率（Power）</strong></td>
+<td>多亮，单位瓦特。凭感觉调：画面别死白也别死黑</td>
+</tr>
+<tr>
+<td><strong>颜色</strong></td>
+<td>暖黄 = 温馨 / 冷蓝 = 清冷 / 纯白 = 中性</td>
+</tr>
+<tr>
+<td><strong>尺寸（Size）</strong></td>
+<td><strong>面积光的尺寸决定阴影软硬</strong>。尺寸小 → 影子锐利（硬朗）；尺寸大 → 影子柔和（高级）</td>
+</tr>
+</tbody>
+</table>
+<p>💡 新手记住一句：<strong>"面光（Area Light）+ 大尺寸" 拍什么都好看</strong>。它是摄影棚柔光箱的数字化身。</p>
+<h2 id="核心概念-2-三点布光-摄影棚的万能配方">核心概念 2：三点布光——摄影棚的万能配方</h2>
+<p>拍产品、拍人像、拍模型，行业通用配方就三盏灯：</p>
+<ul>
+<li><strong>主光（Key）</strong>：最亮，从被摄物斜前上方打来，决定主要明暗；</li>
+<li><strong>补光（Fill）</strong>：较暗，从另一侧补亮暗部，让阴影不至于死黑；</li>
+<li><strong>轮廓光（Rim）</strong>：从后方勾边，把物体从背景里"剥离"出来，立体感的关键。</li>
+</ul>
+<p>来感受四档灯光递进的效果（同一个静物场景）：</p>
+<p><img alt="四种布光对比" src="assets/ch07_light_four.png" /></p>
+<p><em>图 48　①只有环境光（平、无影）→ ②单灯（立体但暗部黑）→ ③加补光（暗部透亮）→ ④加轮廓光（边缘发亮）</em></p>
+<h3 id="照抄就能开始的一组参数">照抄就能开始的一组参数</h3>
+<p>不想从零猜数字？这套参数就是本书配图用的布光，直接照抄：</p>
+<table>
+<thead>
+<tr>
+<th>灯</th>
+<th>大致位置</th>
+<th>功率</th>
+<th>尺寸</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主光 Key</td>
+<td>斜前上方 45°</td>
+<td>120 W</td>
+<td>2.5 m</td>
+<td>定明暗基调，影子主要来自它</td>
+</tr>
+<tr>
+<td>补光 Fill</td>
+<td>另一侧、稍远</td>
+<td>45 W</td>
+<td>3 m</td>
+<td>救暗部，别抢戏</td>
+</tr>
+<tr>
+<td>轮廓光 Rim</td>
+<td>后上方</td>
+<td>80 W</td>
+<td>2 m</td>
+<td>勾边缘，把物体从背景里剥出来</td>
+</tr>
+</tbody>
+</table>
+<p>口诀：<strong>功率上主光最大、轮廓光其次、补光最小；距离都别贴脸（约物体尺寸的 3 倍远）</strong>。世界背景保持浅灰（0.5~0.65 的灰），相当于“免费的环境光”。</p>
+<p>💡 <strong>逐盏调试法</strong>（推荐每次布光都这么干）：先只开主光 → 低分辨率试渲一张，只看明暗和影子；再开补光，调到“能读出暗部”就停；最后开轮廓光，看边缘有没有被勾出来。<strong>一次只改一盏灯，改完就看一眼</strong>——比同时拧三盏灯高效十倍。</p>
+<p><img alt="三灯布置" src="assets/site_ch07_lights.png" /></p>
+<p><em>图 49　真实软件截图：三盏面光的空间关系——右侧面板直接改功率和尺寸</em></p>
+<h2 id="核心概念-3-相机与焦距">核心概念 3：相机与焦距</h2>
+<p>相机就是你在虚拟世界里的镜头。核心概念只有一个：<strong>焦距（Focal Length）决定透视强弱</strong>。</p>
+<p><img alt="焦距对比" src="assets/ch07_focal_trio.png" /></p>
+<p><em>图 50　让"最前面的柱子"在画面里保持差不多大：24mm 贴近拍（空间被拉宽）→ 50mm 标准（接近人眼）→ 85mm 退远拍（压缩感强）</em></p>
+<table>
+<thead>
+<tr>
+<th>焦距</th>
+<th>气质</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24~35mm 广角</td>
+<td>空间拉伸、有冲击力</td>
+<td>大场景、室内</td>
+</tr>
+<tr>
+<td>50mm 标准</td>
+<td>接近人眼、自然</td>
+<td>大部分静物、产品</td>
+</tr>
+<tr>
+<td>85~135mm 长焦</td>
+<td>压缩空间、背景干净</td>
+<td>特写、车辆、人像</td>
+</tr>
+</tbody>
+</table>
+<p>💡 <strong>想要“工程图感”？</strong> 把相机类型从“透视”改成 <strong>正交（Orthographic）</strong>，画面立刻没有“近大远小”，像图纸一样规整——拍机械、做对比图特别好用。</p>
+<p><img alt="正交相机" src="assets/site_ch07_camera.png" /></p>
+<p><em>图 51　真实软件截图：正交相机的画框——框内才是成品，框外都是“工作台”</em></p>
+<hr />
+<h2 id="跟着做-1-把静物摆进相机">跟着做 1：把静物摆进相机</h2>
+<ol>
+<li><code>Ctrl+N</code> 新建场景，删掉默认立方体（选中 <code>X</code> → 删除）；</li>
+<li>搭一个简易"桌面"：加一个圆柱当底座（<code>S</code> 0.35）、再加一个环体当桌面（<code>S</code> 2 <code>G</code> <code>Z</code> 0.7）——或者用 <code>Shift+A</code> → 网格 → 平面当桌板，四条腿用复制；</li>
+<li>把第 3 章的<strong>杯子</strong>（<code>Ctrl+O</code> 打开或从别的文件 <code>Ctrl+C</code>/<code>Ctrl+V</code> 拷过来）放大缩小摆桌上；</li>
+<li>加一个球当苹果（<code>S</code> 缩小，红色材质），一个扁方块当书（蓝色材质）；</li>
+<li><code>Shift+A</code> → 相机，<code>小键盘 0</code> 进入相机视角，然后按 <code>N</code> 打开侧栏 → 勾选"Lock Camera to View（将相机锁定到视图）"→ 直接转视角摆构图；摆好后<strong>再取消勾选</strong>锁定，防止误动。</li>
+</ol>
+<p>💡 相机构图小抄：主体别放正中间（三等分处更耐看）；画面留一点"呼吸空间"；先定相机再打灯，别反过来折腾。</p>
+<p>💡 <strong>摆相机最快的方式</strong>：先用鼠标把视角转到好看的角度，再按 <code>Ctrl+Alt+小键盘 0</code>（视图 → 对齐视图 → 对齐活动摄像机至视图）——相机会瞬间跟到你的视角，比一点点挪相机快得多。</p>
+<h2 id="跟着做-2-三点布光上机">跟着做 2：三点布光上机</h2>
+<ol>
+<li><code>Shift+A</code> → 灯光 → 面光（Area），这是<strong>主光</strong>：<code>G</code> 把它放到被摄物<strong>斜前上方</strong>，功率先给 100W 左右，尺寸拉大到 2~3 米；</li>
+<li>复制一盏（<code>Shift+D</code>）放另一侧当<strong>补光</strong>：功率降到主光的 <strong>1/3</strong>（如 35W），更远一些；</li>
+<li>再复制一盏放到物体<strong>后上方</strong>当<strong>轮廓光</strong>：功率可以给得足（如 80W），从背后"怼"向物体边缘；</li>
+<li>三盏灯对照第 7 章的图调试：主光照亮主体、补光救暗部、轮廓光勾边。</li>
+</ol>
+<p><strong>调光心法</strong>：调一个、看一眼，别一次改三盏。每一盏灯都可以在属性面板里改颜色——暖黄的灯 + 冷色的补光 = 大片的"冷暖对比"质感。</p>
+<h2 id="跟着做-3-渲染你的第一张成品图">跟着做 3：渲染你的第一张成品图</h2>
+<ol>
+<li>顶部属性面板点<strong>相机图标</strong>（渲染属性）；</li>
+<li><strong>渲染引擎</strong>：下拉框中选择。
+   - <strong>Eevee</strong>：实时渲染引擎，秒级出图，本教材的所有配图都是它渲染的——新手首选；
+   - <strong>Cycles</strong>：光线追踪引擎，慢但更"真"（玻璃、反射更准确）。部分精简版本不包含 Cycles，用 Eevee 也完全够学完本书；</li>
+<li>分辨率保持默认 1920×1080（或调成 1280×720 提速）；</li>
+</ol>
+<p><strong>输出设置速查</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>建议</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分辨率</td>
+<td>1920×1080</td>
+<td>想提速就 1280×720</td>
+</tr>
+<tr>
+<td>试渲染</td>
+<td>分辨率百分比 50%</td>
+<td>先看构图，正式出图改回 100%</td>
+</tr>
+<tr>
+<td>格式</td>
+<td>PNG / RGB</td>
+<td>只有要透明背景才用 RGBA</td>
+</tr>
+<tr>
+<td>色彩管理</td>
+<td>保持默认别乱动</td>
+<td>整个项目统一，方便前后对比</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="输出设置" src="assets/site_ch07_output.png" /></p>
+<p><em>图 52　真实软件截图：输出设置面板——分辨率和百分比都在这儿</em>
+4. 按 <code>F12</code> 开始渲染；
+5. 渲染结束后，顶部菜单 图像 → 另存为 → 选 PNG 格式，存到你的项目文件夹——<strong>你的第一张成品图诞生了</strong>。</p>
+<p>⚠️ <strong>只按 <code>Ctrl+S</code>，渲染图是不会自己存下来的。</strong> 保存 <code>.blend</code> 存的只是工程；图片要单独“图像 → 另存为”存成 PNG。两件事，别搞混。</p>
+<p><img alt="保存渲染图" src="assets/site_ch07_save_img.png" /></p>
+<p><em>图 53　真实软件截图：渲染结果已经在图像窗口里——用“图像 → 另存为”把它存成 PNG</em></p>
+<p><img alt="成品图" src="assets/ch07_hero_still_life.png" /></p>
+<p><em>图 54　教材同款场景的成品：三点布光 + 50mm 相机 + Eevee 渲染</em></p>
+<hr />
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>渲染出来一片黑</td>
+<td>没有灯 / 相机对着空处 / 世界背景全黑</td>
+<td>先 <code>小键盘 0</code> 看相机到底拍到了什么；再加灯</td>
+</tr>
+<tr>
+<td>画面死白/过曝</td>
+<td>灯太亮或太多</td>
+<td>减功率；或渲染属性里调低"曝光（Exposure）"</td>
+</tr>
+<tr>
+<td>阴影很糊很脏</td>
+<td>灯的尺寸太大或角度太散</td>
+<td>想要硬朗阴影就把灯尺寸调小 + 靠近一点</td>
+</tr>
+<tr>
+<td>Eevee 里反射是"假"的</td>
+<td>屏幕空间反射的局限</td>
+<td>属正常；重要反射镜头换适合的引擎或补反射体</td>
+</tr>
+<tr>
+<td>相机视角没法调</td>
+<td>没在小键盘 0 的相机视角里 / 没开 Lock Camera to View</td>
+<td><code>小键盘 0</code> 切换进相机视角再调</td>
+</tr>
+<tr>
+<td>打光顺序错了</td>
+<td>先打灯后构图，换构图灯全废</td>
+<td><strong>先定相机与构图，再围绕相机打灯</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>我能搭出三点布光：主光定基调、补光救暗部、轮廓光勾边；</li>
+<li>我按“逐盏调试法”做过一次布光（只开主光 → 试渲染 → 加下一盏）；</li>
+<li>我渲染并单独保存了自己的第一张 PNG 成品图。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>三点布光的三盏灯各叫什么、各干什么？补光大概给主光的多少亮度？</li>
+<li>想拍出"柔和的高级感阴影"，关键调哪个参数？</li>
+<li>24mm 和 85mm 拍同一个物体，画面气质差异是什么？</li>
+<li>为什么本教材全程用 Eevee 也够？它和 Cycles 的根本差别是什么？</li>
+<li>渲染按哪个键？成品图保存要走哪条菜单？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li>主光（Key，主要照明）、补光（Fill，拯救暗部，约主光的 1/3）、轮廓光（Rim，勾边立体）。</li>
+<li>灯的<strong>尺寸（Size）</strong>——越大影子越柔和（配合面光类型）。</li>
+<li>24mm：贴近拍，近大远小夸张、空间感被拉宽；85mm：退远拍，前后压缩、画面干净。</li>
+<li>Eevee 是实时渲染，几秒出图，配合基础材质与灯光效果已足够完成本书全部练习；Cycles 是光线追踪，物理更严格但慢得多。</li>
+<li><code>F12</code> 渲染；渲染窗口里 图像（Image）→ 另存为（Save As），选 PNG。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>灯光四要素</strong>：类型、功率、颜色、尺寸；面光+大尺寸=高级感。</li>
+<li><strong>三点布光</strong>：主光定基调、补光救暗部、轮廓光勾边缘。</li>
+<li><strong>相机</strong>：先构图后打灯；焦距 50mm 起步，广角冲击、长焦压缩。</li>
+<li><strong>引擎</strong>：Eevee 快（本书首选），Cycles 真但慢。</li>
+<li><code>F12</code> 渲染 → 另存 PNG = 你的第一张作品出片。</li>
+<li>到这里，<strong>基础篇结束</strong>——你已经拥有完整的"建模→材质→布光→出片"工作流了。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch06.html"><small>← 上一节</small><span>第 6 章 材质与颜色</span></a><a class="next" href="ch08.html"><small>下一节 →</small><span>第 8 章 进阶：Python 参数化建模</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

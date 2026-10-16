@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 4 章 修改器：新手加速器 · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html" class="active">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-4-章-修改器-新手加速器">第 4 章 修改器：新手加速器</h1>
+<blockquote>
+<p><strong>场景</strong>：你已经能手捏模型了，但有些活儿手捏太傻了——对称的、重复的、要圆润的。修改器就是 Blender 的"自动加工流水线"：你定规则，它干活。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>理解"修改器栈"的运作方式，知道为什么它被称为<strong>非破坏性建模</strong>；</li>
+<li>会使用六种新手最常用修改器：<strong>镜像、细分曲面、阵列、布尔、实体化、倒角</strong>；</li>
+<li>知道修改器该"何时应用（Apply）"。</li>
+</ul>
+<h2 id="核心概念-修改器-modifier-是什么">核心概念：修改器（Modifier）是什么？</h2>
+<p>给物体添加一个修改器 = 在它身上挂一条<strong>自动加工规则</strong>。特点是：</p>
+<ul>
+<li><strong>非破坏性</strong>：规则实时生效（视口和渲染都认），但原始网格没有被改。不满意？随时删掉修改器，物体变回原样。</li>
+<li><strong>可叠加</strong>：一个物体可以挂一排修改器，像流水线一样按顺序加工——这就是"修改器栈"。</li>
+<li><strong>顺序敏感</strong>：同样的几个修改器，换个顺序结果可能完全不同（常见坑里细说）。</li>
+</ul>
+<p>添加方式：选中物体 → 右侧<strong>属性面板</strong>的<strong>蓝色扳手图标</strong>（修改器属性）→ 添加修改器 → 选一个。神器快捷键：<code>Ctrl+1</code>～<code>Ctrl+5</code> 直接给物体挂上对应等级的"细分曲面"。</p>
+<hr />
+<h2 id="六大常用修改器">六大常用修改器</h2>
+<h3 id="①-镜像-mirror-做一半-得整只">① 镜像（Mirror）：做一半，得整只</h3>
+<p>回头看看第 3 章的马克杯——手柄左右对称、杯体完全旋转对称，其实只需要做一半，让镜像修改器补出另一半。</p>
+<p><img alt="镜像前后对比" src="assets/ch04_mirror_pair.png" /></p>
+<p><em>图 30　左：只建了一半（半只猴子）；右：镜像自动补全。对称的椅子、家具、人物都靠它</em></p>
+<p>【跟着做】</p>
+<ol>
+<li><code>Shift+C</code> 把 3D 游标归零（后面的镜像要以游标为中心）；</li>
+<li><code>Shift+A</code> 加一个圆锥体，先 <strong>右键 → 设置原点 → 3D 游标</strong>（把物体的"旋转中心"挪到原点）；</li>
+<li>按 <code>G</code> <code>X</code> <code>1</code> <code>Enter</code>，把圆锥移到原点右侧；</li>
+<li>添加修改器 → 镜像（Mirror）。镜像轴 X 默认开启——看，左侧自动出现了对称的圆锥。</li>
+</ol>
+<p>💡 镜像的逻辑是"以<strong>物体的原点</strong>为中心翻一份拷贝"。所以镜像前把物体原点放到对称轴上（通常就是世界原点），是唯一要记住的事。</p>
+<h3 id="②-细分曲面-subsurf-直角变圆润的魔法">② 细分曲面（Subsurf）：直角变圆润的魔法</h3>
+<p><img alt="细分前后对比" src="assets/ch04_subsurf_pair.png" /></p>
+<p><em>图 31　左：立方体；右：挂上 2 级细分后的样子。低面数玩"变形金刚"就是这么来的</em></p>
+<p>【跟着做】</p>
+<ol>
+<li>新建立方体，按 <code>Ctrl+2</code>（挂 2 级细分），观察它"瘦身变圆"的过程；</li>
+<li>进编辑模式（<code>Tab</code>），<code>3</code> 切面模式，<code>E</code> 拉伸顶面——你会发现模型<strong>像橡皮泥一样圆润地变形</strong>，这就是细分的威力；</li>
+<li>右键 → 平滑着色，质感更顺滑。</li>
+</ol>
+<p>细分的等级（Levels）建议先停在 1～2 级：每加一级，面数 ×4。级别越高越圆，也越吃电脑性能。</p>
+<h3 id="③-阵列-array-一根变一排">③ 阵列（Array）：一根变一排</h3>
+<p><img alt="阵列前后对比" src="assets/ch04_array_pair.png" /></p>
+<p><em>图 32　左：一根柱子；右：阵列复制成一排。栏杆、栅栏、楼梯、链条……重复元素的量产工具</em></p>
+<p>【跟着做】</p>
+<ol>
+<li>建一根细长的立方体当柱子；</li>
+<li>添加修改器 → 阵列（Array）；</li>
+<li>数量（Count）改成 4，把"相对偏移（Relative Offset）"的 X 改成 5——意思是"每根柱子间隔 5 个自身宽度"；</li>
+<li>一排柱子出现了。</li>
+</ol>
+<h3 id="④-布尔-boolean-用模型切模型">④ 布尔（Boolean）：用模型切模型</h3>
+<p><img alt="布尔前后对比" src="assets/ch04_bool_pair.png" /></p>
+<p><em>图 33　左：球与方块相交；右：差集运算后，方块表面留下一个球形凹坑</em></p>
+<p>【跟着做】</p>
+<ol>
+<li>加一个立方体（方块）和一个球体，用 <code>G</code> <code>Z</code> 把球移到方块顶部、<strong>与方块相交</strong>；</li>
+<li>选中方块 → 添加修改器 → 布尔（Boolean）；</li>
+<li>运算选<strong>差集（Difference）</strong>，"物体"选那个球；</li>
+<li>球消失了，方块上多了一个球形凹坑——此时球被"借用"了，别删它，直到你<strong>应用</strong>布尔的修改器（应用后定型，球就可以删了）。</li>
+</ol>
+<p>布尔有四种运算：差集（挖掉）、并集（焊在一起）、交集（只留重叠部分）、切割。以后做"带孔的零件""挖窗洞的模型"全靠它。</p>
+<h3 id="⑤-实体化-solidify-给纸片加厚度">⑤ 实体化（Solidify）：给纸片加厚度</h3>
+<p><img alt="实体化前后对比" src="assets/ch04_solid_pair.png" /></p>
+<p><em>图 34　左：单层曲面，边缘薄如纸；右：实体化后有了可见的厚度</em></p>
+<h3 id="⑥-倒角-修改器版-把-磨圆-变成可调参数">⑥ 倒角（修改器版）：把"磨圆"变成可调参数</h3>
+<p>编辑模式里的 <code>Ctrl+B</code> 是"磨完定型"；挂一个<strong>倒角修改器</strong>，宽度和段数随时能改，不想要、删掉就恢复原样：</p>
+<ol>
+<li>选中物体 → 添加修改器 → 生成 → <strong>倒角（Bevel）</strong>；</li>
+<li>宽度类型用"偏移"，数量填一个<strong>明显小于厚度</strong>的值（经验：倒角别超过最薄处的一半）；</li>
+<li>段数 3 左右；限定方式选"角度"、角度 30°——只磨"比 30° 更尖"的边，平整的面不受影响；</li>
+<li>反复点修改器标题栏的开关，对比硬边和圆润过渡——感受它到底改了什么。</li>
+</ol>
+<p><img alt="倒角修改器" src="assets/site_ch04_bevel_mod.png" /></p>
+<p><em>图 35　真实软件截图：倒角修改器——偏移 0.035、3 段、限角 30°，参数随时可调</em></p>
+<p>💡 <strong>顺序实验</strong>：同时挂上"实体化 + 倒角"，拖一拖它们的先后——先实体化再倒角，厚度边缘也被磨圆；先倒角再实体化，结果完全不同。这就是"顺序敏感"的活教材。</p>
+<p>【跟着做】</p>
+<ol>
+<li>新建一个圆柱体，进编辑模式，用 <code>3</code> 面模式选中顶面和底面，<code>X</code> 删除——得到一个"无盖的圆筒壳"；</li>
+<li>回到物体模式，添加修改器 → 实体化（Solidify），厚度设 0.05；</li>
+<li>圆筒壳长出了真实壁厚，从侧面能清楚看到"边"。</li>
+</ol>
+<p>视频里常见的"建模大神的模型都有厚度"——就是这个修改器。做薄壳零件（车身外壳、机箱、墙体）必备。</p>
+<hr />
+<h2 id="什么时候-应用-修改器">什么时候"应用"修改器？</h2>
+<p>修改器挂着不动，一切实时且可反悔。但以下情况需要<strong>应用（Apply）</strong>——把规则"焊死"进网格：</p>
+<ul>
+<li>布尔：应用后可以把借用的切割物体删掉，也便于后续精细修补；</li>
+<li>要导出给别的软件/游戏引擎时（部分格式会自动应用，但别赌）；</li>
+<li>后续编辑必须基于最终形状时。</li>
+</ul>
+<p>应用方法：修改器面板里每个修改器右上角的小箭头 → 应用（Apply）。⚠️ 应用不可逆，重要节点前先 <code>Ctrl+Shift+S</code> 另存新版本。</p>
+<hr />
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>换顺序结果全变</td>
+<td>修改器栈从上往下执行</td>
+<td>顺序在列表中拖拽调整；"细分"一般放最后（除配合"倒角"的情况）</td>
+</tr>
+<tr>
+<td>镜像出来叠在一起</td>
+<td>物体原点不在对称轴上</td>
+<td>右键 → 设置原点 → 3D 游标（游标在原点时）再镜像</td>
+</tr>
+<tr>
+<td>布尔后满是碎线</td>
+<td>两个物体表面<strong>完全重合</strong>处的计算很脆弱</td>
+<td>让物体轻微相交（别贴面），相交后再布尔</td>
+</tr>
+<tr>
+<td>细分后模型缩水</td>
+<td>细分会"内缩"是正常特性</td>
+<td>加修改器时把"保持边界"等选项了解下；或接受它、按需微调</td>
+</tr>
+<tr>
+<td>挂着修改器就删了布尔用的球</td>
+<td>球被借用后即被隐藏</td>
+<td>应用布尔（Apply）之后，再删球</td>
+</tr>
+<tr>
+<td>应用按钮点了没反应</td>
+<td>可能有多个用户（复制过的物体共用网格）</td>
+<td>面板里点"设为独立数据"或先 <code>Ctrl+J</code>/单独化</td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>六种修改器我每样都动手挂过一次，能说出"前 / 后"两张对比图差在哪；</li>
+<li>我能用环形阵列做出法兰盘（6 个孔均匀分布）；</li>
+<li>我给一个物体同时挂过两个修改器、拖过顺序，看出结果确实不同。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>为什么说修改器是"非破坏性"的？举一个它的好处。</li>
+<li>做一把左右对称的椅子，最少只需要建几分之几？用什么修改器补齐？</li>
+<li><code>Ctrl+2</code> 的效果是什么？</li>
+<li>想让方块上出现 4 个均匀的螺丝孔，你会用哪两个修改器配合？（说出思路即可）</li>
+<li>布尔和别的修改器相比，有什么"额外注意事项"？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li>因为它在修改器栈里实时计算，原始网格没被改动，可以随时删除/修改规则；好处：做了一个错误操作可以一键反悔，还能反复调参数。</li>
+<li>一半（甚至四分之一）；镜像（Mirror）修改器。</li>
+<li>给选中物体挂一个 2 级"细分曲面"修改器。</li>
+<li>思路：建一个圆柱当"孔"，用<strong>阵列</strong>复制出 4 个，再在方块上用<strong>布尔差集</strong>挖掉它们（或先阵列孔、逐个布尔）。</li>
+<li>布尔的切割物体是"借用"关系——不能提前删；另外两物体表面不要完全重合，要真相交。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li><strong>修改器</strong> = 挂在物体上的自动加工规则，非破坏、可叠加、顺序敏感。</li>
+<li><strong>六件套</strong>：镜像（对称）、细分（圆润）、阵列（重复）、布尔（切割）、实体化（厚度）、倒角（圆边）。</li>
+<li>添加：属性面板蓝色扳手 → 添加修改器；<code>Ctrl+1~5</code> 快捷挂细分。</li>
+<li><strong>应用（Apply）</strong> 才定型；应用前先另存版本。</li>
+<li>记住口诀：<strong>能挂修改器就别手捏</strong>——省时、可调、不伤原模型。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch03.html"><small>← 上一节</small><span>第 3 章 建模核心工具：做一只马克杯</span></a><a class="next" href="ch05.html"><small>下一节 →</small><span>第 5 章 拓扑与结构思维</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

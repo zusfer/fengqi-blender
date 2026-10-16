@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第 9 章 工程管理与导入导出：让作品"出得去、回得来" · 风起于青萍之末</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html" class="active">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<article class="chapter">
+<h1 id="第-9-章-工程管理与导入导出-让作品-出得去-回得来">第 9 章 工程管理与导入导出：让作品"出得去、回得来"</h1>
+<blockquote>
+<p><strong>场景</strong>：模型做得漂漂亮亮，导出给朋友/引擎/打印机——结果在对方软件里躺倒了、缩了 100 倍、颜色全丢了。这一章把这些"最后一公里"的坑一次讲清。</p>
+</blockquote>
+<h2 id="学完你会">学完你会</h2>
+<ul>
+<li>认识常用导出格式（OBJ / FBX / GLB / STL）和各自的用途；</li>
+<li>破解"模型导出后躺倒/巨大/消失"的三大经典 bug；</li>
+<li>建立从第一天就该有的文件组织与命名习惯。</li>
+</ul>
+<h2 id="核心概念-1-导出格式怎么选">核心概念 1：导出格式怎么选</h2>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>全名</th>
+<th>用在哪</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>.obj</strong></td>
+<td>Wavefront OBJ</td>
+<td>通用交换（3D 打印切片软件、老软件）</td>
+<td>老牌万能，只有几何+基础材质</td>
+</tr>
+<tr>
+<td><strong>.fbx</strong></td>
+<td>Autodesk FBX</td>
+<td>游戏引擎（Unity/Unreal）、动画行业</td>
+<td>带骨骼动画，工业标准之一</td>
+</tr>
+<tr>
+<td><strong>.glb / .gltf</strong></td>
+<td>glTF</td>
+<td>Web 3D、现代应用、AR/VR</td>
+<td>"3D 界的 JPEG"，现代首选</td>
+</tr>
+<tr>
+<td><strong>.stl</strong></td>
+<td>STL</td>
+<td>3D 打印</td>
+<td>只有形状，无颜色无材质</td>
+</tr>
+<tr>
+<td><strong>.blend</strong></td>
+<td>Blender 原生</td>
+<td>你自己继续改</td>
+<td>全信息打包</td>
+</tr>
+</tbody>
+</table>
+<p>记住三句：<strong>Web/现代应用选 GLB；游戏引擎选 FBX（或 GLB）；3D 打印选 STL。</strong></p>
+<h2 id="核心概念-2-坐标轴的-躺倒-之谜">核心概念 2：坐标轴的"躺倒"之谜</h2>
+<p><img alt="Y-up 与 Z-up" src="assets/ch10_d_axes.png" /></p>
+<p><em>图 57　同一个"站着的房子"，在不同软件里可能"躺着"——因为各自的"朝上轴"不一样</em></p>
+<ul>
+<li>Blender 的世界里：<strong>Z 轴朝上</strong>（房子好好站着）；</li>
+<li>很多别的软件/格式的默认：<strong>Y 轴朝上</strong>；</li>
+<li>导出器一般会<strong>自动转换</strong>（比如 Blender 导出 glTF 时自动换轴）；但老格式 OBJ 的规则比较"随缘"，不同软件对 up 轴的处理有历史包袱。</li>
+</ul>
+<p><strong>作战口诀</strong>：模型在别的软件里躺倒了 → <strong>不是模型错了，是 up 轴没对上</strong>。回去检查导出/导入界面的 "Y up / Z up / up axis" 选项，或者在对方软件里把模型旋转 90° 即可，<strong>千万别回 Blender 重新做</strong>。</p>
+<h2 id="核心概念-3-导出前必做-应用变换">核心概念 3：导出前必做——应用变换</h2>
+<p>导出异常的三大高频元凶，其实是一个根因：</p>
+<blockquote>
+<p><strong>你在物体模式里用 <code>S</code> 缩放了 100 倍、用 <code>R</code> 转了 90°，这些"变换值"还挂在物体上没"焊死"。</strong></p>
+</blockquote>
+<p>部分导出器/引擎会忽略这些未应用的变换值，导致：尺寸不对（巨大/微小）、方向不对（躺倒/倒立）。</p>
+<p><strong>修复</strong>：选中物体 → <code>Ctrl+A</code> → 全部变换（All Transforms）。所有位置/旋转/缩放值归零"焊死"进网格，从此怎么导都不歪。</p>
+<p>⚠️ <code>Ctrl+A</code> 不可逆（相当于提交）。做之前记得 <code>Ctrl+Shift+S</code> 另存一个版本。</p>
+<hr />
+<h2 id="跟着做-1-导出你的马克杯-obj-与-glb-各来一份">跟着做 1：导出你的马克杯（OBJ 与 GLB 各来一份）</h2>
+<p>以第 3 章的马克杯为例：</p>
+<ol>
+<li>打开马克杯文件，选中杯子（手柄也一起选：<code>Shift+左键</code>）；</li>
+<li><strong>先应用变换</strong>：<code>Ctrl+A</code> → 全部变换；</li>
+<li><strong>导出 OBJ</strong>：文件 → 导出 → Wavefront (.obj)：
+   - 勾选"<strong>选择项限定（Selected Only）</strong>"——只导出你选的，免得把相机、灯也塞进去；
+   - 其余默认，导出；</li>
+<li><strong>导出 GLB</strong>：文件 → 导出 → glTF 2.0 (.glb/.gltf)；
+   - 同样勾选"选择项限定"；
+   - "几何 → 应用修改器（Apply Modifiers）"确保勾上（如果你还挂着修改器的话）；
+   - 导出；</li>
+<li>验证：把 glb 拖进任意支持 glTF 的软件/在线查看器（或再导回 Blender 新建场景对比），模型应该保持原位、原尺寸。</li>
+</ol>
+<h2 id="跟着做-2-组织一个不会烂尾的项目文件夹">跟着做 2：组织一个不会烂尾的项目文件夹</h2>
+<p><img alt="推荐文件夹结构" src="assets/ch10_d_folders.png" /></p>
+<p><em>图 58　一个项目 = 五件套：主文件 / 参考 / 导出 / 渲染 / 脚本</em></p>
+<p>照着建一遍你现在的项目文件夹，然后把现有文件归位。核心思想：</p>
+<ul>
+<li><strong>主工程（.blend）永远只有一个</strong>"当下最新版"，历史版本用另存命名（<code>作品A_v3.blend</code>）；</li>
+<li><strong>导出成品（export/）</strong> 随时可删可重做，不心疼；</li>
+<li><strong>渲染图（render/）</strong> 同理，丢弃无压力；</li>
+<li><strong>参考与脚本（ref/、scripts/）</strong> 是项目的"证据链"，永久保留。</li>
+</ul>
+<h2 id="跟着做-3-命名与集合-场景不乱的前提">跟着做 3：命名与集合——场景不乱的前提</h2>
+<ol>
+<li><strong>重命名</strong>：选中物体，按 <code>F2</code>，直接打字改名（<code>右键 → 重命名</code> 也行）。把"Cube.001、Cube.002"改成"车身、炮塔、车轮_L1"——将来你会对着大纲视图找东西，这 10 秒钟能省你 10 分钟；</li>
+<li><strong>集合（Collection）</strong>：大纲视图里右键 → 新建集合，比如"车体零件""灯光相机"；选中物体按 <code>M</code> → 选目标集合，归类收纳。
+   ⚠️ 注意 <code>M</code> 是多义键：<strong>物体模式</strong>下是"移动到集合（Move to Collection）"；<strong>编辑模式</strong>下是"合并顶点（Merge）"。用之前先确认自己在哪个模式——这也是本书反复强调"看清状态"的原因之一。</li>
+</ol>
+<hr />
+<h2 id="跟着做-4-交付检查五步-发图前照着过一遍">跟着做 4：交付检查五步（发图前照着过一遍）</h2>
+<p>把作品发给别人之前，多花五分钟走完这五步——“能打开、没缺件、方向对”靠的是检查，不是运气：</p>
+<ol>
+<li><strong>另存一份交付副本</strong>：保留自己可编辑的原工程；导出时挑干净的东西，别把测试灯、隐藏草稿一起交出去；</li>
+<li><strong>打包资源</strong>：做过贴图的工程，用 文件 → 外部数据 → 自动打包资源，把图片“吃”进 <code>.blend</code> 里——不打包的话，换台电脑贴图全丢（模型变粉红色多半就是这原因）；</li>
+<li><strong>只选该交的物体再导出</strong>：比如只选杯身，导出 GLB 时勾上“选择项限定”；</li>
+<li><strong>重新导入验证</strong>：新建一个空工程，把导出的文件再导回来——看尺寸、方向、颜色对不对。<strong>“导出成功”不等于“对方能正常打开”</strong>，这一步才是验收；</li>
+<li><strong>留一份说明</strong>：告诉对方你用的版本、单位约定和文件清单。</li>
+</ol>
+<p><img alt="导出选中" src="assets/site_ch09_export_sel.png" /></p>
+<p><em>图 59　真实软件截图：只选要交的部分（杯身），灯和相机不选</em></p>
+<p><img alt="导出 GLB 设置" src="assets/site_ch09_export_glb.png" /></p>
+<p><em>图 60　真实软件截图：导出 GLB——勾上“选择项限定”，别有东西被落下</em></p>
+<h2 id="新手常见坑">新手常见坑</h2>
+<table>
+<thead>
+<tr>
+<th>坑</th>
+<th>说明</th>
+<th>对策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导出后模型巨大/微小（100 倍）</td>
+<td>FBX 世界常用"厘米"，Blender 用"米"；或缩放没应用</td>
+<td>导出设置里调"缩放单位"；<code>Ctrl+A</code> 应用变换</td>
+</tr>
+<tr>
+<td>导出后模型躺倒</td>
+<td>Y-up / Z-up 不一致</td>
+<td>检查导出/导入的 up 轴选项，或对方软件里转 90°</td>
+</tr>
+<tr>
+<td>导出后材质变灰</td>
+<td>OBJ/STL 不带复杂材质；贴图文件路径丢了</td>
+<td>用 GLB 保材质；贴图用"打包/相对路径"选项</td>
+</tr>
+<tr>
+<td>导出后细节全无</td>
+<td>修改器没应用也没勾"应用修改器"</td>
+<td>导出设置勾选；或提前 <code>Ctrl+A</code> 应用修改器（也可 Ctrl+A 前先应用）</td>
+</tr>
+<tr>
+<td>场景里东西越堆越乱</td>
+<td>随手添加从不命名</td>
+<td>F2 改名的习惯 + M 归集合</td>
+</tr>
+<tr>
+<td>.blend1 占空间想全删</td>
+<td>它们是备份不是垃圾</td>
+<td>留最近一两版即可，别全删</td>
+</tr>
+</tbody>
+</table>
+<h2 id="过关标准">过关标准</h2>
+<ul>
+<li>我能说出 OBJ / GLB / STL 各适合送给谁、什么场合；</li>
+<li>我亲手走过一次“导出 → 重新导入”的验证；</li>
+<li>我的项目有清楚的文件夹和文件名（主文件一眼能找到）。</li>
+</ul>
+<h2 id="自检题">自检题</h2>
+<ol>
+<li>做 Web 展示、3D 打印、游戏引擎，分别优先导出什么格式？</li>
+<li>导出的模型在别的软件里"躺倒"了，根因和最省事的解决方向是什么？</li>
+<li>为什么导出前建议 <code>Ctrl+A</code> → 全部变换？</li>
+<li>物体模式下 <code>M</code> 和编辑模式下 <code>M</code> 分别做什么？</li>
+</ol>
+<blockquote>
+<p>答案见文末。</p>
+</blockquote>
+<hr />
+<h3 id="自检题答案">自检题答案</h3>
+<ol>
+<li>Web → GLB；3D 打印 → STL；游戏引擎 → FBX 或 GLB。</li>
+<li>根因是 up 轴（Y-up/Z-up）约定不同；方向：改导出/导入的 up 轴设置，或对方软件里转 90°，不要重做模型。</li>
+<li>把未"焊死"的位置/旋转/缩放提交进网格，避免导出器忽略变换值导致的尺寸/方向错误。</li>
+<li>物体模式：移动到集合；编辑模式：合并顶点菜单。</li>
+</ol>
+<hr />
+<h2 id="小结">小结</h2>
+<ul>
+<li>格式三句话：<strong>Web 用 GLB、引擎用 FBX、打印用 STL</strong>。</li>
+<li>躺倒 = up 轴问题，不是模型的错。</li>
+<li>导出前 <code>Ctrl+A</code> 应用变换，导出时勾"选择项限定 + 应用修改器"。</li>
+<li><strong>五件套文件夹</strong>：主文件 / 参考 / 导出 / 渲染 / 脚本。</li>
+<li><code>F2</code> 改名、<code>M</code> 归集合（注意模式）；命名清晰 = 未来的你谢谢现在的你。</li>
+</ul>
+</article>
+<nav class="pager"><a class="prev" href="ch08.html"><small>← 上一节</small><span>第 8 章 进阶：Python 参数化建模</span></a><a class="next" href="ch10.html"><small>下一节 →</small><span>第 10 章 综合实战：三个完整项目</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

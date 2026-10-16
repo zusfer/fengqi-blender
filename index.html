@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《风起于青萍之末》· Blender 3D 建模：新手版</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23e07a1f'/><rect x='26' y='26' width='48' height='48' rx='10' fill='%23fff'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="menu" aria-label="打开目录">☰</button>
+  <a id="brand" href="index.html">风起于青萍之末<span> · Blender 3D 建模：新手版</span></a>
+  <div id="searchbox">
+    <input id="q" type="search" placeholder="搜索全书…（试试：倒角 / 小屋 / UV / 快捷键）" autocomplete="off">
+    <div id="results"></div>
+  </div>
+</header>
+<div id="layout">
+<nav id="sidebar" aria-label="目录">
+<div class="group"><p>开篇</p><a href="index.html" class="active">总目录</a><a href="prologue.html">序章</a></div>
+<div class="group"><p>基础篇</p><a href="ch01.html">第 1 章 认识 Blender</a><a href="ch02.html">第 2 章 必会操作：你的第一个小时</a><a href="ch03.html">第 3 章 建模核心工具：做一只马克杯</a><a href="ch04.html">第 4 章 修改器：新手加速器</a><a href="ch05.html">第 5 章 拓扑与结构思维</a><a href="ch06.html">第 6 章 材质与颜色</a><a href="ch07.html">第 7 章 灯光、相机与渲染</a></div>
+<div class="group"><p>进阶篇</p><a href="ch08.html">第 8 章 进阶：Python 参数化建模</a><a href="ch09.html">第 9 章 工程管理与导入导出</a><a href="ch10.html">第 10 章 综合实战：三个完整项目</a><a href="ch11.html">第 11 章 选修：让模型动起来</a></div>
+<div class="group"><p>附录</p><a href="appendix-a.html">附录 A 快捷键速查卡</a><a href="appendix-b.html">附录 B 常见问题 50 问</a><a href="appendix-c.html">附录 C 中英术语表</a><a href="appendix-d.html">附录 D 学习路线与资源</a></div>
+<div class="group"><p>收束</p><a href="epilogue.html">结束语</a></div>
+</nav>
+<div id="overlay"></div>
+<main id="main">
+<header class="hero">
+  <p class="eyebrow">蒋珏堃 编著 · 黑龙江科技大学</p>
+  <h1>《风起于青萍之末》</h1>
+  <p class="sub">Blender 3D 建模：新手版</p>
+  <p class="meta">18 个板块 · 94 张真实配图 · 零基础到独立创作 · 所有示例附可复现脚本</p>
+  <a class="btn" href="prologue.html">从序章开始阅读 →</a>
+</header>
+<article class="chapter">
+<blockquote>
+<p>一份为新手写的、基于真实项目经验的 Blender 建模教材。所有配图均为真实渲染或程序绘制，所有示例模型附带可复现脚本。</p>
+</blockquote>
+<h2 id="这份教材适合谁">这份教材适合谁</h2>
+<ul>
+<li>完全没碰过 3D 软件的新手（从"打开软件先点哪"讲起）；</li>
+<li>自学过一点但"东一榔头西一棒槌"、想要完整体系的爱好者；</li>
+<li>想做机械/场景/产品类模型，对"比例准、像不像"有真实要求的人。</li>
+</ul>
+<p><strong>不需要任何前置知识。</strong> 需要一台能看视频的电脑 + 一个三键鼠标（触控板也能学）。</p>
+<h2 id="怎么用这份教材">怎么用这份教材</h2>
+<p><strong>推荐路线</strong>（零基础）：按 00 → 11 顺序学，每章动手做完再进下一章。
+<strong>按需查阅</strong>：附录 A（快捷键卡）/ B（50 问）/ C（术语表）随时翻。</p>
+<p>三个里程碑帮你定位进度：</p>
+<table>
+<thead>
+<tr>
+<th>里程碑</th>
+<th>对应章节</th>
+<th>达成标志</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一小时</td>
+<td>01 → 02</td>
+<td>能自由转视角、变换任意物体</td>
+</tr>
+<tr>
+<td>第一件作品</td>
+<td>03 → 04</td>
+<td>独立做出马克杯</td>
+</tr>
+<tr>
+<td>第一张成品图</td>
+<td>05 → 07</td>
+<td>渲染出自己的静物作品</td>
+</tr>
+<tr>
+<td>独立创作</td>
+<td>08 → 11</td>
+<td>参考图复刻 / 参数化 / 三个综合项目</td>
+</tr>
+</tbody>
+</table>
+<h2 id="目录">目录</h2>
+<h3 id="基础篇">基础篇</h3>
+<table>
+<thead>
+<tr>
+<th>章</th>
+<th>标题</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>序</td>
+<td><a href="prologue.html">序章</a></td>
+<td>卷首语、学习方法、环境准备、约定</td>
+</tr>
+<tr>
+<td>01</td>
+<td><a href="ch01.html">认识 Blender</a></td>
+<td>网格概念、界面五区、视角导航、保存</td>
+</tr>
+<tr>
+<td>02</td>
+<td><a href="ch02.html">必会操作：你的第一个小时</a></td>
+<td>G/R/S、锁轴、数值输入、选择系统</td>
+</tr>
+<tr>
+<td>03</td>
+<td><a href="ch03.html">建模核心工具：做一只马克杯</a></td>
+<td>挤出/内插/倒角/环切 + 第一个作品</td>
+</tr>
+<tr>
+<td>04</td>
+<td><a href="ch04.html">修改器：新手加速器</a></td>
+<td>镜像/细分/阵列/布尔/实体化</td>
+</tr>
+<tr>
+<td>05</td>
+<td><a href="ch05.html">拓扑与结构思维</a></td>
+<td>四边面原则、好布线、网格体检</td>
+</tr>
+<tr>
+<td>06</td>
+<td><a href="ch06.html">材质与颜色</a></td>
+<td>Principled BSDF 三参数、UV 入门</td>
+</tr>
+<tr>
+<td>07</td>
+<td><a href="ch07.html">灯光、相机与渲染</a></td>
+<td>三点布光、焦距、Eevee/Cycles、出图</td>
+</tr>
+</tbody>
+</table>
+<h3 id="进阶篇">进阶篇</h3>
+<table>
+<thead>
+<tr>
+<th>章</th>
+<th>标题</th>
+<th>核心内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08</td>
+<td><a href="ch08.html">进阶：Python 参数化建模</a></td>
+<td>常量表、生成脚本、改一个数字造型重造</td>
+</tr>
+<tr>
+<td>09</td>
+<td><a href="ch09.html">工程管理与导入导出</a></td>
+<td>OBJ/FBX/GLB/STL、Y-up 坑、文件组织</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="ch10.html">综合实战：三个完整项目</a></td>
+<td>低多边形小人 / 雨夜便利店街角 / 低多边形小屋</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="ch11.html">选修：让模型动起来</a></td>
+<td>关键帧、插值、曲线编辑器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="附录">附录</h3>
+<table>
+<thead>
+<tr>
+<th>附录</th>
+<th>标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><a href="appendix-a.html">快捷键速查卡</a>（含可打印卡片图）</td>
+</tr>
+<tr>
+<td>B</td>
+<td><a href="appendix-b.html">常见问题 50 问</a></td>
+</tr>
+<tr>
+<td>C</td>
+<td><a href="appendix-c.html">中英术语表</a></td>
+</tr>
+<tr>
+<td>D</td>
+<td><a href="appendix-d.html">学习路线与资源</a></td>
+</tr>
+<tr>
+<td>—</td>
+<td><a href="epilogue.html">结束语</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="配套文件夹">配套文件夹</h2>
+<pre><code>├── assets/      # 全部配图（渲染图 + 示意图）
+├── examples/    # 实战项目成品（.blend）与可复现脚本
+├── tools/       # 本书配图与各版本的生成脚本（渲染库 / 拼图 / 网站构建）
+├── site/        # 多页网站版（双击 site/index.html 即可阅读；可整站部署到静态托管）
+├── Blender新手教材_单文件版.html   # 全部章节合并版（图片内嵌，双击用浏览器打开）
+├── Blender新手教材_打印版.docx     # 全部章节合并 Word 打印版（A4 / 目录 / 页码）
+└── Blender新手教材_打印版.pdf      # 打印版 PDF 预览（目录页为占位，以 Word 版为准）
+</code></pre>
+<ul>
+<li><strong>想打印</strong>：打开 <code>Blender新手教材_打印版.docx</code>（Word 会提示更新目录域，选择"是"即可生成带页码的目录），直接 Ctrl+P；或直接打印 PDF 预览版；</li>
+<li><strong>想当网站看</strong>：双击 <code>site/index.html</code> 本地阅读（支持全文搜索、上一章/下一章）；把整个 <code>site/</code> 文件夹上传到任意静态托管（如 Cloudflare Pages / GitHub Pages）就是一个在线网站；</li>
+<li><strong>想直接看成品</strong>：<code>examples/</code> 里的 .blend 双击即可用 Blender 打开；</li>
+<li><strong>想研究脚本</strong>：<code>tools/</code> 里每个 <code>illu_*.py</code> 都能用 <code>blender --background --python 脚本.py</code> 重跑，重新生成书中配图；</li>
+<li><strong>想改参数玩</strong>：见第 8 章的"常量表 + 生成脚本"方法；</li>
+<li><strong>重编各版本</strong>：改完章节后运行 <code>.venv/bin/python tools/build_docx.py</code>（Word）、<code>build_html.py</code>（单文件 HTML）或 <code>build_site.py</code>（网站版）。</li>
+</ul>
+<blockquote>
+<p>祝你出片顺利。做完作品，记得回来在自检题的答案下面打个勾。</p>
+</blockquote>
+</article>
+<nav class="pager"><a class="ghost"></a><a class="next" href="prologue.html"><small>下一节 →</small><span>序章</span></a></nav>
+<footer id="foot">《风起于青萍之末》· 蒋珏堃 编著 · 黑龙江科技大学<br>本书只用于学习交流用途，侵权必究。</footer>
+</main>
+</div>
+<button id="top" title="回到顶部">↑</button>
+<script src="search-index.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
