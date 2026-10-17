@@ -29,17 +29,17 @@
 <article class="chapter">
 <h1 id="第-2-章-必会操作-你的第一个小时">第 2 章 必会操作：你的第一个小时</h1>
 <blockquote>
-<p><strong>场景</strong>：这一小时不学建模，只练"驾驶技术"。学完它，你能让任何物体在 3D 空间里精确地到你想要的位置——这是后面所有章节的地基。</p>
+<p><strong>场景</strong>：这一小时不学建模，只练“驾驶技术”。学完它，你能让任何物体在 3D 空间里精确地到你想要的位置——这是后面所有章节的地基。</p>
 </blockquote>
 <h2 id="学完你会">学完你会</h2>
 <ul>
 <li>熟练使用变换三件套：移动 <code>G</code>、旋转 <code>R</code>、缩放 <code>S</code>；</li>
 <li>用轴向约束把操作锁定在 X / Y / Z 单轴上；</li>
-<li>用数值输入做"毫米级"精确操作；</li>
+<li>用数值输入把移动 / 旋转 / 缩放精确到小数点；</li>
 <li>掌握选择系统的组合拳，能快速选中想选的东西。</li>
 </ul>
 <h2 id="核心概念-变换-transform-与坐标轴">核心概念：变换（Transform）与坐标轴</h2>
-<p>3D 世界里只有三种"挪动"方式，称为<strong>变换</strong>：</p>
+<p>3D 世界里只有三种“挪动”方式，称为<strong>变换</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -66,14 +66,14 @@
 </tr>
 </tbody>
 </table>
-<p>每个变换都发生在坐标系里。记住右手边这个"三色轴"：</p>
+<p>每个变换都发生在坐标系里。记住右手边这个“三色轴”：</p>
 <ul>
 <li><strong>红色 = X 轴</strong>（左右方向）</li>
 <li><strong>绿色 = Y 轴</strong>（前后方向）</li>
 <li><strong>蓝色 = Z 轴</strong>（上下方向，Blender 里朝上的轴）</li>
 </ul>
 <p><img alt="RGB 坐标轴演示" src="assets/ch02_cube_1_origin.png" /></p>
-<p><em>图 11　场景里的三色轴：红 X、绿 Y、蓝 Z。下面四个图请对照看</em></p>
+<p><em>图 12　场景里的三色轴：红 X、绿 Y、蓝 Z。下面四个图请对照看</em></p>
 <hr />
 <h2 id="跟着做-1-g-r-s-三连">跟着做 1：G / R / S 三连</h2>
 <p>打开 Blender（如果上一个场景还在，按 <code>Ctrl+N</code> 新建一个干净的）。</p>
@@ -81,18 +81,18 @@
 <ol>
 <li>左键点击立方体选中它；</li>
 <li>按 <code>G</code>（Grab 的缩写），然后<strong>只移动鼠标</strong>——立方体会跟着跑，注意此时不要点击；</li>
-<li>左键点击 = 确认；<strong>右键 / <code>Esc</code> = 取消</strong>（把方块放回原位）。这两个"后悔键"之后每次变换都通用。</li>
+<li>左键点击 = 确认；<strong>右键 / <code>Esc</code> = 取消</strong>（把方块放回原位）。这两个“后悔键”之后每次变换都通用。</li>
 </ol>
 <p><img alt="G 移动" src="assets/ch02_cube_2_grab.png" /></p>
-<p><em>图 12　按 G 后移动鼠标，立方体沿鼠标方向移动（图中向右移动到 X 轴正方向）</em></p>
+<p><em>图 13　按 G 后移动鼠标，立方体沿鼠标方向移动（图中向右移动到 X 轴正方向）</em></p>
 <p><strong>② 轴向约束——本课重点</strong></p>
-<p>刚才的移动是"跟着鼠标随便跑"。要沿<strong>单轴</strong>精确移动，在按 <code>G</code> 之后、点击确认之前，再按一下轴键：</p>
+<p>刚才的移动是“跟着鼠标随便跑”。要沿<strong>单轴</strong>精确移动，在按 <code>G</code> 之后、点击确认之前，再按一下轴键：</p>
 <ul>
 <li><code>G</code> 然后按 <code>X</code>：只沿 X 轴移动（红轴方向）</li>
 <li><code>G</code> 然后按 <code>Y</code>：只沿 Y 轴</li>
 <li><code>G</code> 然后按 <code>Z</code>：只沿 Z 轴（上下方向）</li>
 </ul>
-<p>再按一次同一个轴键 = 切换到"排除该轴"；按 <code>Shift+X</code> = 在 YZ 平面上自由移动（排除 X 轴）。</p>
+<p>再按一次同一个轴键 = 切换到“排除该轴”；按 <code>Shift+X</code> = 在 YZ 平面上自由移动（排除 X 轴）。</p>
 <p><strong>③ 数值输入——精确操作</strong></p>
 <p>Blender 的变换支持直接打数字：</p>
 <pre><code>G  X  1.5  Enter    → 沿 X 轴精确移动 1.5 米
@@ -106,14 +106,14 @@ S      2    Enter    → 整体放大到 2 倍
 <li><code>Esc</code> 取消。再按 <code>R</code>、<code>Z</code>、输入 <code>45</code>、<code>Enter</code>——绕竖直轴精确转 45 度。</li>
 </ol>
 <p><img alt="R 旋转" src="assets/ch02_cube_3_rotate.png" /></p>
-<p><em>图 13　绕 Z 轴旋转 45 度（俯视时能看到明显转动）</em></p>
+<p><em>图 14　绕 Z 轴旋转 45 度（俯视时能看到明显转动）</em></p>
 <p><strong>⑤ 缩放（S）</strong></p>
 <ol>
 <li>选中立方体，按 <code>S</code>，移动鼠标——变大变小；</li>
 <li><code>S</code> <code>X</code> <code>1.5</code> <code>Enter</code> = 只在 X 方向拉长 1.5 倍（长条效果）。</li>
 </ol>
 <p><img alt="S 缩放" src="assets/ch02_cube_4_scale.png" /></p>
-<p><em>图 14　整体放大 1.6 倍后的样子</em></p>
+<p><em>图 15　整体放大 1.6 倍后的样子</em></p>
 <hr />
 <h2 id="跟着做-2-选择系统的组合拳">跟着做 2：选择系统的组合拳</h2>
 <table>
@@ -129,7 +129,7 @@ S      2    Enter    → 整体放大到 2 倍
 <td>选中一个物体</td>
 </tr>
 <tr>
-<td><code>Shift + 左键</code></td>
+<td><code>Shift+左键</code></td>
 <td>加选 / 减选（在已选中上再点一次 = 取消）</td>
 </tr>
 <tr>
@@ -137,7 +137,7 @@ S      2    Enter    → 整体放大到 2 倍
 <td>全选（再按一次 = 取消全选）</td>
 </tr>
 <tr>
-<td><code>Alt + A</code></td>
+<td><code>Alt+A</code></td>
 <td>全部取消选择</td>
 </tr>
 <tr>
@@ -153,33 +153,33 @@ S      2    Enter    → 整体放大到 2 倍
 <li><code>Alt+A</code> 全取消 → 再单独左键点球选中它；</li>
 <li>按 <code>X</code>（删除菜单）→ 删除 → 球没了。<code>Ctrl+Z</code> 能把它救回来。</li>
 </ol>
-<p>💡 <strong>添加物体的位置规律</strong>：新物体总是出现在<strong>3D 游标</strong>（那个红白小圆圈）所在的位置。如果新加的物体总是不在原点：<code>Shift+C</code>（把游标归零并全览视角），或 <code>Shift+右键</code> 点地面把游标放过去，再加物体。这是新手最常问的"我的新物体去哪了"。</p>
+<p>💡 <strong>添加物体的位置规律</strong>：新物体总是出现在<strong>3D 游标</strong>（那个红白小圆圈）所在的位置。如果新加的物体总是不在原点：<code>Shift+C</code>（把游标归零并全览视角），或 <code>Shift+右键</code> 点地面把游标放过去，再加物体。这是新手最常问的“我的新物体去哪了”。</p>
 <hr />
-<h2 id="跟着做-3-综合小练习-搭一张-小凳子">跟着做 3：综合小练习——搭一张"小凳子"</h2>
+<h2 id="跟着做-3-综合小练习-搭一张-小凳子">跟着做 3：综合小练习——搭一张“小凳子”</h2>
 <p>用刚学的技术搭出以下结构（不用追求好看，练手感）：</p>
 <ol>
 <li><code>Shift+A</code> 加一个立方体，<code>S</code> <code>0.8</code> <code>Enter</code> 缩小一点；</li>
-<li><code>G</code> <code>Z</code> <code>0.5</code> <code>Enter</code> 抬高到半空——这是"凳面"；</li>
+<li><code>G</code> <code>Z</code> <code>0.5</code> <code>Enter</code> 抬高到半空——这是“凳面”；</li>
 <li><code>Shift+A</code> 再加一个立方体，<code>S</code> <code>0.15</code> <code>Enter</code> 缩成小柱子；</li>
 <li><code>G</code> <code>X</code> 移动它到凳面一角下方，再 <code>G</code> <code>Z</code> 调整高度顶住凳面；</li>
 <li>再添加三条腿（可以复制现成的腿：选中后 <code>Shift+D</code> 复制，<code>G</code> 挪位置）。</li>
 </ol>
-<p><code>Shift+D</code> 是<strong>复制物体</strong>的快捷键：复制出来的副本会粘着鼠标，<code>G</code> 或直接点击决定放哪。以后你想"再要一个一样的"，就靠它。</p>
-<p><img alt="小凳子练习示意" src="assets/ch02_cube_1_origin.png" /></p>
-<p><em>图 15　摆完大概是这样一棵"独腿凳"，四项操作全用上了，这就够了</em></p>
+<p><code>Shift+D</code> 是<strong>复制物体</strong>的快捷键：复制出来的副本会粘着鼠标，<code>G</code> 或直接点击决定放哪。以后你想“再要一个一样的”，就靠它。</p>
+<p><img alt="小凳子练习示意" src="assets/ch02_stool.png" /></p>
+<p><em>图 16　小凳子练习示意：凳面 + 四条腿——G / R / S、复制和数值输入全用上了，这就够了</em></p>
 <hr />
 <h2 id="进阶一点-变换的数值面板">进阶一点：变换的数值面板</h2>
-<p>每次做完操作（比如刚移动完），左下角会弹出一个小面板（或按 <code>F9</code> 呼出），里面是该次操作的<strong>参数</strong>：移动了多少、旋转了几度，都可以回头精调。这就是为什么 Blender 允许你"先粗略做，再精确改"。</p>
-<p>另外，视口右侧按 <code>N</code> 打开的**侧栏（Sidebar）**里，能看到并直接修改选中物体的位置/旋转/缩放数值——需要"把坐标输入成 0.35 这种"的时候，这里是操作台。</p>
+<p>每次做完操作（比如刚移动完），左下角会弹出一个小面板（或按 <code>F9</code> 呼出），里面是该次操作的<strong>参数</strong>：移动了多少、旋转了几度，都可以回头精调。这就是为什么 Blender 允许你“先粗略做，再精确改”。</p>
+<p>另外，视口右侧按 <code>N</code> 打开的**侧栏（Sidebar）**里，能看到并直接修改选中物体的位置/旋转/缩放数值——需要“把坐标输入成 0.35 这种”的时候，这里是操作台。</p>
 <hr />
-<h2 id="进阶一点-世界轴-局部轴与-尺寸-缩放">进阶一点：世界轴、局部轴与"尺寸 ≠ 缩放"</h2>
-<p><strong>世界轴 vs 局部轴。</strong> 变换时再按一次同一个轴键（比如 <code>G</code> <code>X</code> <code>X</code>），约束就从"世界的 X"切换成"物体自己的 X"。物体被旋转过之后，按它"自己的方向"移动会顺手得多——视口顶部会显示当前用的是全局还是局部。</p>
-<p><strong>尺寸 ≠ 缩放。</strong> 按 <code>N</code> 打开侧栏看看："尺寸"是物体<strong>实际多大</strong>，"缩放"是相对原始网格的<strong>倍率</strong>。被 <code>S</code> 随意缩过的物体，缩放值不是 1——平时没感觉，但后面加修改器（尤其倒角和厚度）时容易出怪结果。</p>
-<p><strong>收尾习惯：<code>Ctrl+A</code> → 缩放。</strong> 对用 <code>S</code> 改过大小的物体，选中它 → <code>Ctrl+A</code> → 缩放：外观一点不变，缩放值变回 (1, 1, 1)，等于把"这次缩放"焊进网格。建模告一段落、准备加修改器之前，顺手做一遍。</p>
+<h2 id="进阶一点-世界轴-局部轴与-尺寸-缩放">进阶一点：世界轴、局部轴与“尺寸 ≠ 缩放”</h2>
+<p><strong>世界轴 vs 局部轴。</strong> 变换时再按一次同一个轴键（比如 <code>G</code> <code>X</code> <code>X</code>），约束就从“世界的 X”切换成“物体自己的 X”。物体被旋转过之后，按它“自己的方向”移动会顺手得多——视口顶部会显示当前用的是全局还是局部。</p>
+<p><strong>尺寸 ≠ 缩放。</strong> 按 <code>N</code> 打开侧栏看看：“尺寸”是物体<strong>实际多大</strong>，“缩放”是相对原始网格的<strong>倍率</strong>。被 <code>S</code> 随意缩过的物体，缩放值不是 1——平时没感觉，但后面加修改器（尤其倒角和厚度）时容易出怪结果。</p>
+<p><strong>收尾习惯：<code>Ctrl+A</code> → 缩放。</strong> 对用 <code>S</code> 改过大小的物体，选中它 → <code>Ctrl+A</code> → 缩放：外观一点不变，缩放值变回 (1, 1, 1)，等于把“这次缩放”焊进网格。建模告一段落、准备加修改器之前，顺手做一遍。</p>
 <p><img alt="应用缩放前" src="assets/site_ch02_npanel.png" /></p>
-<p><em>图 16　真实软件截图：N 面板里缩放是 (0.5, 0.5, 0.25)——这是倍率，不是实际尺寸</em></p>
+<p><em>图 17　真实软件截图：N 面板里缩放是 (0.5, 0.5, 0.25)——这是倍率，不是实际尺寸</em></p>
 <p><img alt="应用缩放后" src="assets/site_ch02_apply_scale.png" /></p>
-<p><em>图 17　<code>Ctrl+A</code> → 缩放之后：外观没变，缩放值全变回了 (1, 1, 1)</em></p>
+<p><em>图 18　<code>Ctrl+A</code> → 缩放之后：外观没变，缩放值全变回了 (1, 1, 1)</em></p>
 <h2 id="新手常见坑">新手常见坑</h2>
 <table>
 <thead>
@@ -212,21 +212,21 @@ S      2    Enter    → 整体放大到 2 倍
 </tr>
 <tr>
 <td>缩放后导出别的软件比例不对</td>
-<td>缩放值没有"应用"</td>
+<td>缩放值没有“应用”</td>
 <td>见上一节：<code>Ctrl+A</code> → 缩放，一步解决</td>
 </tr>
 <tr>
 <td>键盘没小键盘、<code>1/2/3</code> 没反应</td>
 <td>或者是你正在中文输入法下</td>
-<td>切英文输入法；没有小键盘就勾选"模拟小键盘"</td>
+<td>切英文输入法；没有小键盘就勾选“模拟小键盘”</td>
 </tr>
 </tbody>
 </table>
 <h2 id="过关标准">过关标准</h2>
 <ul>
-<li>我能说出框选两个方向的区别，并用"右往左"快速选走一堆零星小物体；</li>
-<li>我能开着 <code>F8</code> 正交 + <code>F3</code> 捕捉，用三种方式（相对坐标 / 直接输距离 / 捕捉咬点）精确给尺寸；</li>
-<li>我知道"尺寸"和"缩放"的区别，并对缩放过的物体做过一次 <code>Ctrl+A</code> → 缩放。</li>
+<li>我能用 <code>G</code> / <code>R</code> / <code>S</code> + 锁轴 + 数值输入，把物体精确摆到指定位置（比如 <code>G</code> <code>Z</code> <code>0.5</code>）；</li>
+<li>我看得懂左下角的操作参数面板，会用它回头精调刚做完的操作；</li>
+<li>我知道“尺寸”和“缩放”的区别，并对缩放过的物体做过一次 <code>Ctrl+A</code> → 缩放。</li>
 </ul>
 <h2 id="自检题">自检题</h2>
 <ol>

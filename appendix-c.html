@@ -46,6 +46,11 @@
 <td>主工作区域</td>
 </tr>
 <tr>
+<td>比例编辑</td>
+<td>Proportional Editing</td>
+<td>带柔性的联动变形</td>
+</tr>
+<tr>
 <td>布尔</td>
 <td>Boolean</td>
 <td>用模型互相切割的修改器</td>
@@ -58,7 +63,7 @@
 <tr>
 <td>材质</td>
 <td>Material</td>
-<td>表面"是什么做的"</td>
+<td>表面“是什么做的”</td>
 </tr>
 <tr>
 <td>材质槽</td>
@@ -66,19 +71,29 @@
 <td>一个物体可挂多个材质，槽位管理</td>
 </tr>
 <tr>
+<td>参考图</td>
+<td>Reference</td>
+<td>复刻/对照用的图片</td>
+</tr>
+<tr>
 <td>场景</td>
 <td>Scene</td>
 <td>所有物体/灯光/相机的容器</td>
 </tr>
 <tr>
-<td>顶点</td>
-<td>Vertex</td>
-<td>网格最小单位：一个点</td>
+<td>大纲视图</td>
+<td>Outliner</td>
+<td>物体清单面板</td>
 </tr>
 <tr>
-<td>顶点组</td>
-<td>Vertex Group</td>
-<td>分组管理的顶点集合</td>
+<td>倒角</td>
+<td>Bevel</td>
+<td>磨圆边缘</td>
+</tr>
+<tr>
+<td>导入</td>
+<td>Import</td>
+<td>把外部文件放进 Blender</td>
 </tr>
 <tr>
 <td>点光</td>
@@ -86,14 +101,44 @@
 <td>灯泡式光源</td>
 </tr>
 <tr>
-<td>法线</td>
-<td>Normal</td>
-<td>面的朝向，决定受光方向</td>
+<td>迭代</td>
+<td>Iteration</td>
+<td>改一点、验一轮的循环</td>
+</tr>
+<tr>
+<td>顶点</td>
+<td>Vertex</td>
+<td>网格最小单位：一个点</td>
+</tr>
+<tr>
+<td>顶点合并</td>
+<td>Merge Vertices</td>
+<td>把多个点并成一个</td>
+</tr>
+<tr>
+<td>顶点色</td>
+<td>Vertex Color</td>
+<td>存在顶点上的颜色数据</td>
+</tr>
+<tr>
+<td>顶点组</td>
+<td>Vertex Group</td>
+<td>分组管理的顶点集合</td>
+</tr>
+<tr>
+<td>多边面</td>
+<td>N-Gon</td>
+<td>五条边以上的面</td>
 </tr>
 <tr>
 <td>反照率 / 基础色</td>
 <td>Base Color / Albedo</td>
 <td>表面固有色</td>
+</tr>
+<tr>
+<td>法线</td>
+<td>Normal</td>
+<td>面的朝向，决定受光方向</td>
 </tr>
 <tr>
 <td>非破坏性</td>
@@ -106,14 +151,14 @@
 <td>把模型的一部分拆成新物体</td>
 </tr>
 <tr>
-<td>父子关系</td>
-<td>Parent / Child</td>
-<td>移动父物体，子物体跟随</td>
-</tr>
-<tr>
 <td>复合对象</td>
 <td>Compound Object</td>
 <td>多个形体合成的对象</td>
+</tr>
+<tr>
+<td>父子关系</td>
+<td>Parent / Child</td>
+<td>移动父物体，子物体跟随</td>
 </tr>
 <tr>
 <td>高斯模糊</td>
@@ -121,14 +166,14 @@
 <td>图像/后期模糊</td>
 </tr>
 <tr>
-<td>光滑着色</td>
-<td>Shade Smooth</td>
-<td>让表面显示为平滑</td>
-</tr>
-<tr>
 <td>光影</td>
 <td>Lighting</td>
 <td>灯光与阴影的总称</td>
+</tr>
+<tr>
+<td>关键帧</td>
+<td>Keyframe</td>
+<td>动画时间点上的记录</td>
 </tr>
 <tr>
 <td>环切</td>
@@ -141,14 +186,9 @@
 <td>甜甜圈形基本体</td>
 </tr>
 <tr>
-<td>集合</td>
-<td>Collection</td>
-<td>大纲视图里的分组文件夹</td>
-</tr>
-<tr>
-<td>挤出</td>
-<td>Extrude</td>
-<td>拉出新的几何</td>
+<td>剪影</td>
+<td>Silhouette</td>
+<td>物体的轮廓形状</td>
 </tr>
 <tr>
 <td>交集</td>
@@ -156,14 +196,24 @@
 <td>布尔四种运算之一</td>
 </tr>
 <tr>
-<td>角面 / 翼板</td>
-<td>Fender</td>
-<td>侧面探出的板件（家具、载具通用）</td>
+<td>挤出</td>
+<td>Extrude</td>
+<td>拉出新的几何</td>
+</tr>
+<tr>
+<td>集合</td>
+<td>Collection</td>
+<td>大纲视图里的分组文件夹</td>
 </tr>
 <tr>
 <td>镜头 / 焦距</td>
 <td>Lens / Focal Length</td>
 <td>相机参数，决定透视强弱</td>
+</tr>
+<tr>
+<td>镜像</td>
+<td>Mirror</td>
+<td>对称复制的修改器</td>
 </tr>
 <tr>
 <td>局部坐标</td>
@@ -174,6 +224,11 @@
 <td>矩阵</td>
 <td>Matrix</td>
 <td>变换的数学表示（进阶）</td>
+</tr>
+<tr>
+<td>空物体</td>
+<td>Empty</td>
+<td>无几何的参考点/父级</td>
 </tr>
 <tr>
 <td>控制点</td>
@@ -201,19 +256,19 @@
 <td>视口内的平滑显示</td>
 </tr>
 <tr>
-<td>顶点合并</td>
-<td>Merge Vertices</td>
-<td>把多个点并成一个</td>
+<td>平滑着色</td>
+<td>Shade Smooth</td>
+<td>让表面显示为平滑</td>
 </tr>
 <tr>
-<td>切除 / 切刀</td>
+<td>切刀</td>
 <td>Knife</td>
 <td>手动划线的切割工具</td>
 </tr>
 <tr>
-<td>实体化</td>
-<td>Solidify</td>
-<td>给无厚度表面加厚的修改器</td>
+<td>三角面</td>
+<td>Triangle</td>
+<td>三条边的面</td>
 </tr>
 <tr>
 <td>世界环境</td>
@@ -221,9 +276,34 @@
 <td>场景的大环境（背景光/色）</td>
 </tr>
 <tr>
+<td>实体化</td>
+<td>Solidify</td>
+<td>给无厚度表面加厚的修改器</td>
+</tr>
+<tr>
+<td>输出 / 导出</td>
+<td>Export</td>
+<td>把成果给别的软件</td>
+</tr>
+<tr>
+<td>四边面</td>
+<td>Quad</td>
+<td>四条边的面</td>
+</tr>
+<tr>
 <td>透明胶片</td>
 <td>Film Transparent</td>
 <td>渲染透明背景</td>
+</tr>
+<tr>
+<td>透视图</td>
+<td>Perspective</td>
+<td>近大远小的自然视图</td>
+</tr>
+<tr>
+<td>拓扑</td>
+<td>Topology</td>
+<td>面的排布方式</td>
 </tr>
 <tr>
 <td>网格</td>
@@ -231,14 +311,14 @@
 <td>由点线面组成的物体表面</td>
 </tr>
 <tr>
-<td>修改器</td>
-<td>Modifier</td>
-<td>自动加工规则，非破坏性</td>
-</tr>
-<tr>
 <td>细分曲面</td>
 <td>Subdivision Surface</td>
 <td>让模型变圆润的修改器</td>
+</tr>
+<tr>
+<td>修改器</td>
+<td>Modifier</td>
+<td>自动加工规则，非破坏性</td>
 </tr>
 <tr>
 <td>渲染</td>
@@ -251,34 +331,14 @@
 <td>Eevee / Cycles 等</td>
 </tr>
 <tr>
-<td>序列 / 关键帧</td>
-<td>Keyframe</td>
-<td>动画时间点上的记录</td>
-</tr>
-<tr>
-<td>阵列</td>
-<td>Array</td>
-<td>复制排布的修改器</td>
-</tr>
-<tr>
-<td>镜像</td>
-<td>Mirror</td>
-<td>对称复制的修改器</td>
-</tr>
-<tr>
 <td>样条曲线</td>
 <td>Spline</td>
 <td>曲线的一种类型</td>
 </tr>
 <tr>
-<td>正交视图</td>
-<td>Orthographic</td>
-<td>无透视变形的工程视图</td>
-</tr>
-<tr>
-<td>主光</td>
-<td>Key Light</td>
-<td>三点布光中最重要的灯</td>
+<td>翼子板</td>
+<td>Fender</td>
+<td>车轮上方的护板（车辆、载具）</td>
 </tr>
 <tr>
 <td>游标</td>
@@ -301,9 +361,29 @@
 <td>动画时间单位</td>
 </tr>
 <tr>
+<td>正交视图</td>
+<td>Orthographic</td>
+<td>无透视变形的工程视图</td>
+</tr>
+<tr>
+<td>阵列</td>
+<td>Array</td>
+<td>复制排布的修改器</td>
+</tr>
+<tr>
 <td>重采样</td>
 <td>Resample</td>
 <td>重新均匀分布（进阶）</td>
+</tr>
+<tr>
+<td>主光</td>
+<td>Key Light</td>
+<td>三点布光中最重要的灯</td>
+</tr>
+<tr>
+<td>着色</td>
+<td>Shading</td>
+<td>表面显色方式的总称</td>
 </tr>
 <tr>
 <td>自动保存</td>
@@ -321,89 +401,9 @@
 <td>本书章节末尾的问答</td>
 </tr>
 <tr>
-<td>着色</td>
-<td>Shading</td>
-<td>表面显色方式的总称</td>
-</tr>
-<tr>
 <td>坐标轴</td>
 <td>Axis</td>
 <td>X/Y/Z 三轴</td>
-</tr>
-<tr>
-<td>大纲视图</td>
-<td>Outliner</td>
-<td>物体清单面板</td>
-</tr>
-<tr>
-<td>倒角</td>
-<td>Bevel</td>
-<td>磨圆边缘</td>
-</tr>
-<tr>
-<td>顶点色</td>
-<td>Vertex Color</td>
-<td>存在顶点上的颜色数据</td>
-</tr>
-<tr>
-<td>三角面</td>
-<td>Triangle</td>
-<td>三条边的面</td>
-</tr>
-<tr>
-<td>四边面</td>
-<td>Quad</td>
-<td>四条边的面</td>
-</tr>
-<tr>
-<td>多边面</td>
-<td>N-Gon</td>
-<td>五条边以上的面</td>
-</tr>
-<tr>
-<td>拓扑</td>
-<td>Topology</td>
-<td>面的排布方式</td>
-</tr>
-<tr>
-<td>空物体</td>
-<td>Empty</td>
-<td>无几何的参考点/父级</td>
-</tr>
-<tr>
-<td>透视图</td>
-<td>Perspective</td>
-<td>近大远小的自然视图</td>
-</tr>
-<tr>
-<td>比例编辑</td>
-<td>Proportional Editing</td>
-<td>带柔性的联动变形</td>
-</tr>
-<tr>
-<td>参考图</td>
-<td>Reference</td>
-<td>复刻/对照用的图片</td>
-</tr>
-<tr>
-<td>剪影</td>
-<td>Silhouette</td>
-<td>物体的轮廓形状</td>
-</tr>
-<tr>
-<td>输出 / 导出</td>
-<td>Export</td>
-<td>把成果给别的软件</td>
-</tr>
-<tr>
-<td>导入</td>
-<td>Import</td>
-<td>把外部文件放进 Blender</td>
-</tr>
-<tr>
-<td>迭代</td>
-<td>Iteration</td>
-<td>改一点、验一轮的循环</td>
 </tr>
 </tbody>
 </table>

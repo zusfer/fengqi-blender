@@ -29,20 +29,20 @@
 <article class="chapter">
 <h1 id="第-8-章-进阶-python-参数化建模-改一个数字-造型重造">第 8 章 进阶：Python 参数化建模——改一个数字，造型重造</h1>
 <blockquote>
-<p><strong>场景</strong>：你做好一张桌子，朋友说"想要 1.8 米的长条版"。手捏党熬夜重画；参数化党改了 1 个数字，10 秒后新桌子出炉。这一章带你摸到"自动化"的门槛——放心，只用最基础的几行代码。</p>
+<p><strong>场景</strong>：你做好一张桌子，朋友说“想要 1.8 米的长条版”。手捏党熬夜重画；参数化党改了 1 个数字，10 秒后新桌子出炉。这一章带你摸到“自动化”的门槛——放心，只用最基础的几行代码。</p>
 </blockquote>
 <h2 id="学完你会">学完你会</h2>
 <ul>
-<li>明白"参数化"是什么、什么时候值得用；</li>
+<li>明白“参数化”是什么、什么时候值得用；</li>
 <li>在 Blender 里运行你的第一段脚本；</li>
-<li>学会"常量表 + 生成脚本"的简单工作法；</li>
-<li>知道"无头渲染"是怎么回事（了解即可，不强求会用）。</li>
+<li>学会“常量表 + 生成脚本”的简单工作法；</li>
+<li>知道“无头渲染”是怎么回事（了解即可，不强求会用）。</li>
 </ul>
-<h2 id="核心概念-什么是-参数化">核心概念：什么是"参数化"</h2>
+<h2 id="核心概念-什么是-参数化">核心概念：什么是“参数化”</h2>
 <p><strong>参数化 = 把尺寸变成数字，让程序按数字干活。</strong></p>
-<p>先看效果——下面两张图来自<strong>同一段脚本</strong>，唯一改动是"桌长"这一个数字（0.9 → 1.8）：</p>
+<p>先看效果——下面两张图来自<strong>同一段脚本</strong>，唯一改动是“桌长”这一个数字（0.9 → 1.8）：</p>
 <p><img alt="参数化效果：同一脚本，仅改桌长" src="assets/param_table_pair.png" /></p>
-<p><em>图 55　数字变了，桌子自动"长"出来了——这就是参数化</em></p>
+<p><em>图 56　数字变了，桌子自动“长”出来了——这就是参数化</em></p>
 <p>什么时候值得用参数化？</p>
 <table>
 <thead>
@@ -94,11 +94,11 @@ print(&quot;生成完毕：&quot;, count, &quot;根柱子&quot;)
 </ol>
 <p>代码其实就三句人话：</p>
 <ul>
-<li><code>import bpy</code>：引入 Blender 的"操作接口"，脚本的第一行永远长这样；</li>
-<li><code>bpy.ops.mesh.primitive_cube_add(...)</code>：就是"添加立方体"这个动作的代码版，和 <code>Shift+A</code> 做的事一模一样；</li>
+<li><code>import bpy</code>：引入 Blender 的“操作接口”，脚本的第一行永远长这样；</li>
+<li><code>bpy.ops.mesh.primitive_cube_add(...)</code>：就是“添加立方体”这个动作的代码版，和 <code>Shift+A</code> 做的事一模一样；</li>
 <li><code>for i in range(count):</code>：把下面的动作重复 <code>count</code> 次，每次位置往后挪一点。</li>
 </ul>
-<p>💡 看出来了吗？<strong>写脚本就是把"你手动输入的数值"变成"纸面上的数字"</strong>。就这么简单。</p>
+<p>💡 看出来了吗？<strong>写脚本就是把“你手动输入的数值”变成“纸面上的数字”</strong>。就这么简单。</p>
 <h2 id="跟着做-2-改数字-再看变化">跟着做 2：改数字，再看变化</h2>
 <p>回到那段代码，把第一行改成：</p>
 <pre><code class="language-python">count = 12       # 试试 12 根
@@ -139,18 +139,19 @@ print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
 <p>【跟着做】</p>
 <ol>
 <li>把两段代码分别存成两个文件（<code>geom_table.py</code> 和 <code>build_table.py</code>），放在同一个文件夹；</li>
-<li>在 Scripting 工作区用"文本 → 打开"载入 <code>build_table.py</code>，运行——一张小桌出现；</li>
+<li>在 Scripting 工作区用“文本 → 打开”载入 <code>build_table.py</code>，运行——一张小桌出现；</li>
 <li><strong>只改常量表里的 <code>TABLE_LENGTH</code></strong>（0.9 → 1.8），重新运行——桌子自动变成 1.8 米长条版。</li>
 </ol>
+<p>💡 如果运行报错 <code>No module named 'geom_table'</code>：在 <code>build_table.py</code> 最上面补两行——<code>import sys</code> 和 <code>sys.path.append("存放这两个文件的文件夹路径")</code>，告诉 Blender 去哪里找常量表。</p>
 <p>💡 这就是参数化的全部秘密：<strong>改数字的地方只有一处（常量表），其余全部自动</strong>。项目越大，这个习惯越值钱。</p>
 <p>把整个流程串起来，就是一张图：</p>
 <p><img alt="参数化工作流程" src="assets/ch08_d_flow.png" /></p>
-<p><em>图 56　图示：常量表 → 生成脚本 → 无头渲染 → 对比检查，不满意就回去改数字再跑一遍</em></p>
+<p><em>图 57　图示：常量表 → 生成脚本 → 无头渲染 → 对比检查，不满意就回去改数字再跑一遍</em></p>
 <h2 id="了解一下-无头渲染">了解一下：无头渲染</h2>
-<p>"无头（headless）渲染" = <strong>不打开 Blender 界面，用命令行直接出图</strong>。适合"一次渲染 8 个视角"这类批量活儿：</p>
+<p>“无头（headless）渲染” = <strong>不打开 Blender 界面，用命令行直接出图</strong>。适合“一次渲染 8 个视角”这类批量活儿：</p>
 <pre><code class="language-bash">blender --background --python build_table.py    # 不进界面，直接跑脚本
 </code></pre>
-<p>你不需要马上学会它，只要知道<strong>有这么一回事</strong>：参数化 + 无头渲染，就是"批量生成模型和图片"的组合拳。感兴趣的话，等前面的内容都用熟了再回来研究，不必现在啃。</p>
+<p>你不需要马上学会它，只要知道<strong>有这么一回事</strong>：参数化 + 无头渲染，就是“批量生成模型和图片”的组合拳。感兴趣的话，等前面的内容都用熟了再回来研究，不必现在啃。</p>
 <hr />
 <h2 id="新手常见坑">新手常见坑</h2>
 <table>
@@ -163,7 +164,7 @@ print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
 </thead>
 <tbody>
 <tr>
-<td>脚本运行了，"什么都没发生"</td>
+<td>脚本运行了，“什么都没发生”</td>
 <td>物体加在了视线外</td>
 <td>按 <code>Home</code> 全览视角找找</td>
 </tr>
@@ -174,26 +175,26 @@ print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
 </tr>
 <tr>
 <td>上一批柱子还在，又叠了一批</td>
-<td>脚本是"继续添加"，不是"重来"</td>
+<td>脚本是“继续添加”，不是“重来”</td>
 <td>先 <code>Ctrl+Z</code> 撤销，或新建场景再跑</td>
 </tr>
 <tr>
 <td>想调参数找不到数字</td>
 <td>数字散落在代码各处</td>
-<td>学"跟着做 3"，把所有数字集中到常量表</td>
+<td>学“跟着做 3”，把所有数字集中到常量表</td>
 </tr>
 </tbody>
 </table>
 <h2 id="过关标准">过关标准</h2>
 <ul>
-<li>我能说出脚本的"三段式"：参数写顶部 → 循环管重复 → 命令干实事；</li>
+<li>我能说出脚本的“三段式”：参数写顶部 → 循环管重复 → 命令干实事；</li>
 <li>我成功加载并运行过一次脚本，跑出了图形（或模型）；</li>
 <li>我改过脚本里的一个数字，重跑看到结果变了。</li>
 </ul>
 <h2 id="自检题">自检题</h2>
 <ol>
 <li>哪类东西值得参数化？举两个例子。</li>
-<li>"常量表 + 生成脚本"的两个文件各管什么？</li>
+<li>“常量表 + 生成脚本”的两个文件各管什么？</li>
 <li><code>for i in range(count):</code> 这行代码是什么意思？</li>
 <li>无头渲染适合什么场景？</li>
 </ol>
@@ -212,7 +213,7 @@ print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
 <h2 id="小结">小结</h2>
 <ul>
 <li><strong>参数化 = 尺寸变数字，程序按数字干活</strong>；适合家具、建筑、反复调尺寸的项目。</li>
-<li>Blender 里切到 <strong>Scripting 工作区</strong>就能写脚本；<code>bpy.ops</code> 就是"操作的代码版"。</li>
+<li>Blender 里切到 <strong>Scripting 工作区</strong>就能写脚本；<code>bpy.ops</code> 就是“操作的代码版”。</li>
 <li><strong>常量表 + 生成脚本</strong>是正经项目的骨架：数字住一起，逻辑管自动。</li>
 <li>无头渲染 = 批量出图的后门，<strong>先知道、后使用</strong>。</li>
 </ul>
