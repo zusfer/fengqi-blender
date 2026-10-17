@@ -39,7 +39,7 @@
 <li>动手做完四个网格小实验：合并顶点、比例编辑、面朝向、非流形快查。</li>
 </ul>
 <h2 id="核心概念-1-三种面">核心概念 1：三种面</h2>
-<p><img alt="三种面" src="assets/ch05_d_faces.png" /></p>
+<p><img alt="三种面" src="assets/ch05_d_faces.webp" /></p>
 <p><em>图 37　四边形是“好公民”，三角形是“临时工”，多边形是“定时炸弹”</em></p>
 <table>
 <thead>
@@ -70,10 +70,10 @@
 <p><strong>为什么四边形好？</strong> 把它想象成网兜：四边形的网兜拉伸时格子均匀变形；五边形、三角形的网兜一拉就扭曲。这是 3D 行业几十年的经验结论——记住“<strong>能用四边形就用四边形</strong>”就够了。</p>
 <h2 id="核心概念-2-布线跟着形状走">核心概念 2：布线跟着形状走</h2>
 <p>给一块板开个圆孔，两种做法的差距一目了然：</p>
-<p><img alt="圆孔布线对比" src="assets/ch05_annulus_pair.png" /></p>
+<p><img alt="圆孔布线对比" src="assets/ch05_annulus_pair.webp" /></p>
 <p><em>图 38　左：线一圈圈顺着圆走（好）。右：线跟孔“拧着”（拉伸必炸）</em></p>
 <p>再看两个真实例子：</p>
-<p><img alt="真实布线对照" src="assets/ch05_wire_pair.png" /></p>
+<p><img alt="真实布线对照" src="assets/ch05_wire_pair.webp" /></p>
 <p><em>图 39　左：立方体细分后全是均匀四边形（教科书级干净）。右：UV 球的极点处是三角扇——这是球体的“天生结构”，不必恐慌，把镜头躲开它就行</em></p>
 <p>一句话总结：<strong>线条要顺着结构的走向排</strong>——圆孔周围用环状线，转角处让四边形自然过渡。平时看着差不多，一形变就分出高下。</p>
 <h2 id="核心概念-3-先大形-后细节-全章最重要">核心概念 3：先大形，后细节（全章最重要）</h2>
@@ -135,9 +135,9 @@
 <li>正常的封闭模型从外面看应该“一片蓝”；看到红色，就是那儿的面反了：编辑模式 <code>A</code> 全选 → <code>Shift+N</code> 重新计算外侧；</li>
 <li>检查完把“面朝向”关掉，免得一直看“蓝乎乎”的。</li>
 </ol>
-<p><img alt="面朝向——有反面" src="assets/site_ch05_normals_bad.png" /></p>
+<p><img alt="面朝向——有反面" src="assets/site_ch05_normals_bad.webp" /></p>
 <p><em>图 40　真实软件截图：这条红色竖条就是被翻转的面——“面朝向”一开，问题藏不住</em></p>
-<p><img alt="面朝向——修复后" src="assets/site_ch05_normals_fixed.png" /></p>
+<p><img alt="面朝向——修复后" src="assets/site_ch05_normals_fixed.webp" /></p>
 <p><em>图 41　<code>Shift+N</code> 之后红色消失。以后遇到“黑面 / 现象怪”，固定套路：开面朝向 → 见红就重算</em></p>
 <h3 id="实验-d-非流形快查-封闭物体体检">实验 D：非流形快查（封闭物体体检）</h3>
 <p>编辑模式 → 选择菜单 → <strong>按特征全选 → 非流形</strong>。封闭的实体（比如杯子）应该<strong>什么都选不中</strong>；如果选出了一圈开放边，说明那里有洞或缺面——用 <code>F</code> 补面，或者回上一步检查是不是误删了面。</p>

@@ -41,7 +41,7 @@
 <h2 id="核心概念-什么是-参数化">核心概念：什么是“参数化”</h2>
 <p><strong>参数化 = 把尺寸变成数字，让程序按数字干活。</strong></p>
 <p>先看效果——下面两张图来自<strong>同一段脚本</strong>，唯一改动是“桌长”这一个数字（0.9 → 1.8）：</p>
-<p><img alt="参数化效果：同一脚本，仅改桌长" src="assets/param_table_pair.png" /></p>
+<p><img alt="参数化效果：同一脚本，仅改桌长" src="assets/param_table_pair.webp" /></p>
 <p><em>图 56　数字变了，桌子自动“长”出来了——这就是参数化</em></p>
 <p>什么时候值得用参数化？</p>
 <table>
@@ -145,7 +145,7 @@ print(&quot;桌子生成完毕！桌长 =&quot;, TABLE_LENGTH)
 <p>💡 如果运行报错 <code>No module named 'geom_table'</code>：在 <code>build_table.py</code> 最上面补两行——<code>import sys</code> 和 <code>sys.path.append("存放这两个文件的文件夹路径")</code>，告诉 Blender 去哪里找常量表。</p>
 <p>💡 这就是参数化的全部秘密：<strong>改数字的地方只有一处（常量表），其余全部自动</strong>。项目越大，这个习惯越值钱。</p>
 <p>把整个流程串起来，就是一张图：</p>
-<p><img alt="参数化工作流程" src="assets/ch08_d_flow.png" /></p>
+<p><img alt="参数化工作流程" src="assets/ch08_d_flow.webp" /></p>
 <p><em>图 57　图示：常量表 → 生成脚本 → 无头渲染 → 对比检查，不满意就回去改数字再跑一遍</em></p>
 <h2 id="了解一下-无头渲染">了解一下：无头渲染</h2>
 <p>“无头（headless）渲染” = <strong>不打开 Blender 界面，用命令行直接出图</strong>。适合“一次渲染 8 个视角”这类批量活儿：</p>

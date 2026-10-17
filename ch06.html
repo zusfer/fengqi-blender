@@ -66,7 +66,7 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="金属度 × 粗糙度 对比矩阵" src="assets/ch06_metal_rough_grid.png" /></p>
+<p><img alt="金属度 × 粗糙度 对比矩阵" src="assets/ch06_metal_rough_grid.webp" /></p>
 <p><em>图 42　一张图看懂三参数：前排是“非金属”（金属度=0），后排是“金属”（金属度=1）；从左到右粗糙度越来越大。注意金属的“镜面感”和普通的“高光点”完全是两种东西</em></p>
 <p><strong>新手速查表</strong>（常用材质的参数配方）：</p>
 <table>
@@ -114,7 +114,7 @@
 <hr />
 <h2 id="跟着做-1-给马克杯换三种材质">跟着做 1：给马克杯换三种材质</h2>
 <p>先看效果对照——同一只杯子（第 3 章的作品），只改材质参数：</p>
-<p><img alt="同一只杯子的三种材质" src="assets/ch06_mug_trio.png" /></p>
+<p><img alt="同一只杯子的三种材质" src="assets/ch06_mug_trio.webp" /></p>
 <p><em>图 43　左到右：陶瓷 / 铬金属 / 金色。差距全在三个滑条上</em></p>
 <p>【跟着做】（以白瓷为例）</p>
 <ol>
@@ -126,7 +126,7 @@
 </ol>
 <p>【跟着做】（选做）把这只杯子改成“铬”：基础色拉成浅灰、粗糙度降到 0.05、金属度拉到 <strong>1</strong>；再改“金”：基础色换成金黄。做完打开<strong>渲染预览</strong>（<code>Z</code> 菜单里最下面一档）看最终效果。</p>
 <p>💡 材质是“物体属性”而不是快捷键操作，所以想养成好习惯：<strong>每做一个物件，顺手把它的材质建好并起名</strong>（比如 <code>陶瓷_白</code>），别留一堆 <code>Material.001</code>——等场景里 30 个物体时，你会感谢自己。</p>
-<p><img alt="材质属性面板" src="assets/site_ch06_material.png" /></p>
+<p><img alt="材质属性面板" src="assets/site_ch06_material.webp" /></p>
 <p><em>图 44　真实软件截图：属性面板 → 红色小球图标 → 新建——基础色 / 金属度 / 粗糙度都在这儿</em></p>
 <h2 id="跟着做-2-uv-入门-贴图的-地图">跟着做 2：UV 入门——贴图的“地图”</h2>
 <p>有些材质不只是纯色，而是要把图“贴”上去（比如照片、木纹、logo）。想把一张平面图画到立体模型表面，就需要一个“摊平坐标”——这就是 <strong>UV</strong>：</p>
@@ -134,7 +134,7 @@
 <p><strong>UV = 把 3D 表面像剥橘子皮一样摊平到一张 2D 纸上。</strong> 图画在那张纸上，再“包”回模型。摊得不好（拉伸、重叠），贴图就会花。</p>
 </blockquote>
 <p>怎么一眼看出摊得好不好？<strong>棋盘格大法</strong>：给模型贴一张方格图——</p>
-<p><img alt="UV 棋盘格检查" src="assets/ch06_uv_checker.png" /></p>
+<p><img alt="UV 棋盘格检查" src="assets/ch06_uv_checker.webp" /></p>
 <p><em>图 45　圆柱贴棋盘格：侧面格子还算方正（好），顶面格子被放射状拉长（拉伸了）</em></p>
 <p>【跟着做】（选做，做了印象更深）</p>
 <ol>
@@ -152,11 +152,11 @@
 <li>材质里 <code>Shift+A</code> 搜“图像纹理”，打开一张图片（练习素材在 <code>examples/</code> 文件夹里，叫“贴纸素材.png”），把它的“颜色”接到基础色；</li>
 <li>在左边把 UV 岛拖大、拖正——右边平面上的图案跟着改变位置和大小。</li>
 </ol>
-<p><img alt="贴纸素材" src="assets/site_ch06_label.png" /></p>
+<p><img alt="贴纸素材" src="assets/site_ch06_label.webp" /></p>
 <p><em>图 46　练习用的贴纸素材——已放在 examples/ 文件夹，直接拿来用</em></p>
-<p><img alt="UV 编辑器" src="assets/site_ch06_uv_editor.png" /></p>
+<p><img alt="UV 编辑器" src="assets/site_ch06_uv_editor.webp" /></p>
 <p><em>图 47　真实软件截图：UV 编辑器——左边是“摊平的皮 + 贴图”，右边是贴到模型上的效果</em></p>
-<p><img alt="展开后的 UV 岛" src="assets/site_ch06_uv_island.png" /></p>
+<p><img alt="展开后的 UV 岛" src="assets/site_ch06_uv_island.webp" /></p>
 <p><em>图 48　平面展开后是一块方正的 UV 岛，就像把纸盒摊平</em></p>
 <p>三条以后会反复用到的规则，先混个脸熟：</p>
 <ul>
