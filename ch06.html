@@ -125,8 +125,8 @@
 <p>怎么一眼看出摊得好不好？用<strong>棋盘格大法</strong>：给模型贴一张方格图，哪里变形一目了然：</p>
 <p><img alt="UV 棋盘格检查" src="assets/ch06_uv_checker.webp" /></p>
 <p><em>图 49　圆柱贴棋盘格：侧面格子还算方正（好），顶面格子被放射状拉长（拉伸了）</em></p>
-<p>动手试试（选做，做了印象更深）：新建一个圆柱体，顶部工作区切到 <strong>Shading（着色）</strong>；选中圆柱，新建材质后 <code>Shift+A</code> → 纹理 → <strong>棋盘格（Checker Texture）</strong>；用鼠标把棋盘格节点的"颜色"输出拖到原理化 BSDF 的"基础色"输入上；回到 Layout 工作区切"材质预览"，观察哪里格子变形了。</p>
-<p><strong>再进一步：给盒子贴一张贴纸。</strong> UV 的完整方法以后慢慢学，但最小的闭环值得现在就体验一次——给一个平面贴上图案：加一个平面（<code>Shift+A</code> → 网格 → 平面），放大一点、立起来（<code>R</code> <code>X</code> <code>90</code>），当"贴纸"；顶部工作区切到 <strong>UV Editing</strong>（左边是把表面"摊平"的图纸，右边是 3D 场景）；选中平面 → <code>Tab</code> 编辑模式 → <code>A</code> 全选 → <code>U</code> → <strong>展开（Unwrap）</strong>，四个角被摊成一块长方形的"UV 岛"；材质里 <code>Shift+A</code> 搜"图像纹理"，打开一张图片（练习素材在 <code>examples/</code> 文件夹里，叫"贴纸素材.png"），把它的"颜色"接到基础色；最后在左边把 UV 岛拖大、拖正——右边平面上的图案跟着改变位置和大小。</p>
+<p>动手试试（选做，做了印象更深）：新建一个圆柱体，顶部工作区切到 <strong>Shading（着色）</strong>；选中圆柱，新建材质后 <code>Shift+A</code> → 纹理 → <strong>棋盘格（Checker Texture）</strong>；用鼠标把棋盘格节点的"颜色"输出拖到原理化 BSDF 的"基础色"输入上；回到**布局（Layout）**工作区切"材质预览"，观察哪里格子变形了。</p>
+<p><strong>再进一步：给盒子贴一张贴纸。</strong> UV 的完整方法以后慢慢学，但最小的闭环值得现在就体验一次——给一个平面贴上图案：加一个平面（<code>Shift+A</code> → 网格 → 平面），放大一点、立起来（<code>R</code> <code>X</code> <code>90</code>），当"贴纸"；顶部工作区切到 <strong>UV 编辑（UV Editing）</strong>（左边是把表面"摊平"的图纸，右边是 3D 场景）；选中平面 → <code>Tab</code> 编辑模式 → <code>A</code> 全选 → <code>U</code> → <strong>展开（Unwrap）</strong>，四个角被摊成一块长方形的"UV 岛"；材质里 <code>Shift+A</code> 搜"图像纹理"，打开一张图片（练习素材在 <code>examples/</code> 文件夹里，叫"贴纸素材.png"），把它的"颜色"接到基础色；最后在左边把 UV 岛拖大、拖正——右边平面上的图案跟着改变位置和大小。</p>
 <p><img alt="贴纸素材" src="assets/site_ch06_label.webp" /></p>
 <p><em>图 50　练习用的贴纸素材——已放在 examples/ 文件夹，直接拿来用</em></p>
 <p><img alt="UV 编辑器" src="assets/site_ch06_uv_editor.webp" /></p>

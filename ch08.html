@@ -80,9 +80,9 @@ for i in range(count):
 
 print(&quot;生成完毕：&quot;, count, &quot;根柱子&quot;)
 </code></pre>
-<p>然后点击文本框上面的<strong>运行脚本</strong>按钮（或按 <code>Alt+P</code>），再切回 Layout 工作区看一眼——6 根柱子整整齐齐地站在那里：</p>
+<p>然后点击文本框上面的<strong>运行脚本</strong>按钮（或按 <code>Alt+P</code>），再切回**布局（Layout）**工作区看一眼——6 根柱子整整齐齐地站在那里：</p>
 <p><img alt="第8章 运行脚本的结果" src="assets/ch08_ui_1_result.webp" /></p>
-<p><em>图 61　真实界面截图（本书自摄）：回到 Layout 工作区，6 根柱子已经就位——这就是刚才那段脚本干的事</em></p>
+<p><em>图 61　真实界面截图（本书自摄）：回到布局工作区，6 根柱子已经就位——这就是刚才那段脚本干的事</em></p>
 <p>这段代码翻译成"人话"，其实就三句：<code>import bpy</code> 是引入 Blender 的"操作接口"，脚本的第一行永远长这样；<code>bpy.ops.mesh.primitive_cube_add(...)</code> 就是"添加立方体"这个动作的代码版，和 <code>Shift+A</code> 做的事一模一样；<code>for i in range(count):</code> 是"把下面的动作重复 <code>count</code> 次"，每次位置往后挪一点。</p>
 <p>💡 看出来了吗？<strong>写脚本，就是把你平时手动输入的数值，变成"纸面上的数字"</strong>。就这么简单。</p>
 <h2 id="跟着做-2-改数字-再看变化">跟着做 2：改数字，再看变化</h2>
